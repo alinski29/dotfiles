@@ -1,0 +1,108 @@
+{
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.languageServer": "Pylance",
+    "kite.showWelcomeNotificationOnStartup": false,
+    "terminal.integrated.commandsToSkipShell": [
+        "language-julia.interrupt"
+    ],
+    "yaml.schemas": {
+        "file:///toc.schema.json": "/toc\\.yml/i"
+    },
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "go.toolsManagement.autoUpdate": true,
+    "git.suggestSmartCommit": false,
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "julia.execution.codeInREPL": true,
+    "julia.execution.resultType": "inline",
+    "julia.symbolCacheDownload": true,
+    "workbench.colorTheme": "One Dark Pro Darker",
+    "editor.fontSize": 13,
+    "editor.tabSize": 2,
+    "editor.guides.indentation": false,
+    "editor.fontFamily": "'FiraCode Nerd Font', 'JetBrains Mono Nerd Font', 'Cascadia Code',  'RobotoMono Nerd Font'",
+    "julia.enableTelemetry": false,
+    "julia.format.indent": 2,
+    "editor.lineNumbers": "relative",
+    "editor.minimap.enabled": false,
+    "files.exclude": {
+        "**/.idea": true
+    },
+    "notebook.lineNumbers": "on",
+    "zenMode.hideLineNumbers": false,
+    "search.showLineNumbers": true,
+    // Vim 
+    "vim.enableNeovim": true,
+    "vim.neovimUseConfigFile": true,
+    "vim.neovimPath": "/usr/bin/nvim",
+    "vim.useSystemClipboard": true,
+    "vim.handleKeys": {
+        "<C-a>": true,
+        "<C-g>": false
+    },
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        }
+    ],
+    "vim.statusBarColorControl": true,
+    "vim.statusBarColors.normal": [
+        "#8FBCBB",
+        "#000"
+    ],
+    "vim.statusBarColors.insert": [
+        "#BF616A",
+        "#000"
+    ],
+    "vim.statusBarColors.visual": [
+        "#B48EAD",
+        "#000"
+    ],
+    "vim.statusBarColors.visualline": [
+        "#B48EAD",
+        "#000"
+    ],
+    "vim.statusBarColors.visualblock": [
+        "#A3BE8C",
+        "#000"
+    ],
+    "vim.statusBarColors.replace": "#D08770",
+    "vim.statusBarColors.commandlineinprogress": "#007ACC",
+    "vim.statusBarColors.searchinprogressmode": "#007ACC",
+    "vim.statusBarColors.easymotionmode": "#007ACC",
+    "vim.statusBarColors.easymotioninputmode": "#007ACC",
+    "vim.statusBarColors.surroundinputmode": "#007ACC",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#8FBCBB",
+        "statusBar.noFolderBackground": "#8FBCBB",
+        "statusBar.debuggingBackground": "#8FBCBB",
+        "statusBar.foreground": "#000",
+        "statusBar.debuggingForeground": "#000"
+    },
+    "[julia]": {
+        "editor.defaultFormatter": "julialang.language-julia"
+    },
+    "editor.cursorSmoothCaretAnimation": true,
+    "editor.cursorBlinking": "smooth",
+    "workbench.iconTheme": "material-icon-theme",
+    "julia.enableCrashReporter": false,
+    "extensions.ignoreRecommendations": true
+}

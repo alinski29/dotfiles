@@ -1,0 +1,75 @@
+set surround
+source ~/.config/nvim/commons.vim
+
+
+" Navigate tabs
+nnoremap <S-l> gt
+nnoremap <S-h> gT
+
+
+" Handlers
+sethandler <C-S-p> n-v:ide i:vim ":GotoAction
+sethandler <C-S-.> n-v:ide i:vim ":GotoSymbol
+sethandler <C-.> n-v:ide i:vim ":FileStructurePopup
+nnoremap <C-o> :action RecentFiles<cr>
+sethandler <C-o> n-v:ide i:vim ":RecentFiles
+nnoremap <C-x> :action CloseContent<cr>
+sethandler <C-x> n-v:ide i:vim ":CloseContent
+
+sethandler <C-e> n-v:ide i:vim "ActivateProjectToolWindow
+sethandler <C-S-x> n-v:ide i:vim "CloseActiveTab
+sethandler <C-h> n-v:ide i:vim "HideAllWindows
+
+sethandler <C-S-=> n-v:ide i:vim "EditorIncreaseFontSize
+sethandler <C-S--> n-v:ide i:vim "EditorDecreaseFontSize
+sethandler <C-S-k> n-v:ide i:vim "ShowSettings
+sethandler <C-S-z> n-v:ide i:vim ":ToggleZenMode
+sethandler <C-b> n-v:idea i:vim " Navigate back
+sethandler <C-n> n-v:idea i:vim " Navigate next (forward)
+
+" Search and replace
+sethandler <C-f> n-v:idea i:vim "Find
+sethandler <C-r> n-v:ide i:vim ":Replace
+sethandler <C-S-r> n-v:ide i:vim ":ReplaceInPath
+sethandler <C-S-f> n-v:ide i:vim ":FindInFiles
+sethandler <C-S-m> n-v:ide i:vim ":ViewMainMenu
+
+" Splitting
+nnoremap <C-\> :action SplitVertically<cr>
+sethandler <C-\> n-v:ide i:vim "SplitVertically
+sethandler <C--> n-v:ide i:vim" SplitHorizontally<CR>
+sethandler <A-l> n-v:ide i:vim" NextSplitter<cr>
+sethandler <A-h> n-v:ide i:vim" PrevSplitter<cr>
+sethandler <A-S-l> n-v:ide i:vim" MoveEditorToOppositeTabGroup<cr>
+sethandler <A-S-h> n-v:ide i:vim "MoveEditorToOppositeTabGroup
+
+" Reordering tabs
+nnoremap <C-S-h>  :action com.mnw.tabmover.actions.MoveTabUpAction<cr>
+nnoremap <C-S-l>  :action com.mnw.tabmover.actions.MoveTabDownAction<cr>
+sethandler <C-S-h> n-v:ide i:vim "com.mnw.tabmover.actions.MoveTabupAction
+sethandler <C-S-l> n-v:ide i:vim "com.mnw.tabmover.actions.MoveTabDownAction
+
+" Comments
+sethandler <C-/> n-v:ide i:vim "CommentByLineComment<cr>
+sethandler <C-S-/> n-v:ide i:vim "CommentByBlockComment<cr>
+
+nnoremap <space>[ :action CollapseRegion<cr>
+nnoremap <space>] :action ExpandRegion<cr>
+
+" Code editing
+set ideajoin
+set idearefactormode=keep
+
+nnoremap <space>, :action RenameElement<cr>
+nnoremap <space>i :action QuickJavaDoc<cr>
+nnoremap <space>d :action QuickImplementations<cr>
+nnoremap <space>t :action QuickTypeDefinition<cr>
+nnoremap <space>. :action FileStructurePopup<cr>
+nnoremap <space>h :action CallHierarchy<cr>
+nnoremap <space>p :action ParameterInfo<cr>
+nnoremap <space>r :action FindUsages<cr>
+nnoremap <space><S-d> :action GotoDeclaration<cr>
+nnoremap <space><S-t> :action GotoTypeDeclaration<cr>
+nnoremap <space><S-r> :action FindUsages<cr>
+sethandler <C-p> n-v:idea i:vim
+sethandler <C-q> n-v idea i:vim

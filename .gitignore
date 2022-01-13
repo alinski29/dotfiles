@@ -4,5 +4,5 @@
 .stfolder/
 *.netrwhist
 nvim-vimscript/
-nvim/lua/plugin/
 zsh/secrets.env
+nvim/plugin/packer_compiled.lua
