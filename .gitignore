@@ -1,0 +1,8 @@
+.vscode/
+.idea/
+.stversions/
+.stfolder/
+*.netrwhist
+nvim-vimscript/
+nvim/lua/plugin/
+zsh/secrets.env
