@@ -17,9 +17,9 @@ keymap('v', '>', '>gv', {})
 
 -- Navigate buffers
 keymap('n', '<S-l>', ':bn<CR>', opts)
-keymap('n', '<TAB>', ':bn<CR>', opts)
+-- keymap('n', '<TAB>', ':bn<CR>', opts)
 keymap('n', '<S-h>', ':bp<CR>', opts)
-keymap('n', '<S-TAB>', ':bp<CR>', opts)
+-- keymap('n', '<S-TAB>', ':bp<CR>', opts)
 keymap('n', '<A-S-l>', ':BufferLineMoveNext<CR>', opts)
 keymap('n', '<A-S-h>', ':BufferLineMovePrev<CR>', opts)
 keymap('n', '<c-x>', ':bd<CR>', opts)
