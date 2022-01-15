@@ -30,8 +30,9 @@ keymap('n', '<A-l>', ':wincmd l<CR>', opts)
 keymap('n', '<A-j>', ':wincmd j<CR>', opts)
 keymap('n', '<A-k>', ':wincmd k<CR>', opts)
 
--- Window splitting
--- keymap('n', '<C-v>', '<C-w>j', opts)
+-- Window splitting (same keys work in Telescope and NvimTree)
+keymap('n', '<c-v>', '<c-w>v', opts)
+keymap('n', '<c-x>', '<c-w>s' , opts)
 
 -- Resize with arrows
 keymap('n', '<C-Up>', ':resize -2<CR>', opts)
