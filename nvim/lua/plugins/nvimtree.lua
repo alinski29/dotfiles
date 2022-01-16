@@ -48,7 +48,9 @@ require'nvim-tree'.setup {
     auto_resize = false,
     mappings = {
       custom_only = false,
-      list = {}
+      list = {
+         { key = {"<C-h>"}, cb = require'nvim-tree.config'.nvim_tree_callback("split"), mode = "n"}
+      }
     },
     number = false,
     relativenumber = false,

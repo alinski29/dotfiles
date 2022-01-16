@@ -12,6 +12,14 @@ require('telescope').setup{
       "*/.vscode/*",
       "*/.idea/*",
     },
-    prompt_prefix = '$ '
+    prompt_prefix = '$ ',
+    mappings = {
+      n = {
+        ["<C-h>"] = actions.select_horizontal,
+      },
+      i = {
+        ["<C-h>"] = actions.select_horizontal,
+      },
+    },
   }
 }
