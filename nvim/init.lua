@@ -1,25 +1,28 @@
-require('settings')
-require('keymaps')
-
--- Load plugin configuration
-require('plugins/packer')
--- local config_files = vim.fn.globpath('lua/plugins', '*.lua'):gmatch("([^\n]*)\n?")
--- for config_file in config_files do
---   print(config_file)
---   if not string.find(config_file, "init.lua") and not string.find(config_file, 'packer.lua') then
---     local file = config_file:gsub('lua/', ''):gsub("[.]lua", "")
---     if file:len() > 0 then require(file) end
---   end
--- end
-
-local plugins = {'autopairs', 'bufferline', 'cmp', 'comment', 'lspconfig', 'lspkind', 'lualine', 'nvimtree', 'telescope', 'treesitter', 'toggleterm', 'metals'}
-for _, plugin in ipairs(plugins) do
-  --print("plugins/" .. plugin)
-  require("plugins/" .. plugin)
+local function scandir(directory)
+	local i, t, popen = 0, {}, io.popen
+	local pfile = popen('ls -a "' .. directory .. '"')
+	for filename in pfile:lines() do
+		i = i + 1
+		t[i] = filename
+	end
+	pfile:close()
+	return t
 end
 
-require('onedark').setup {
-  style = 'cool'
-}
-require('onedark').load()
--- require('rose-pine').set('dawn')
+require("settings")
+require("keymaps")
+require("plugins/packer")
+-- Dynamicaly load plugin configuration
+local plugin_dir = "/home/" .. os.getenv("USER") .. "/.config/nvim/lua/plugins"
+for _, cfg in ipairs(scandir(plugin_dir)) do
+	if not string.find(cfg, "init.lua") and not string.find(cfg, "packer.lua") then
+		local plugin = cfg:gsub("[.]lua", ""):gsub("[.]", "")
+		if plugin:len() > 0 then
+			require("plugins/" .. plugin)
+		end
+	end
+end
+
+local theme = require("onedark")
+theme.setup({ style = "cool" })
+theme.load()
