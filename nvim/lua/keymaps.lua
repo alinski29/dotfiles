@@ -55,35 +55,5 @@ keymap('n', '<c-n>', '<c-i>', opts)
 keymap('n', '<c-e>', ':NvimTreeToggle<CR>', opts)
 keymap('n', '<c-o>', ':Telescope find_files<CR>', opts)
 --keymap('n', '<c-f>', ':Telescope grep_string<CR>', opts)
-keymap('n', '<c-f>', ':Telescope live_grep<CR>', opts)
-
-
-keymap('n', '<leader>d', ':lua vim.lsp.buf.definition()<CR>', opts)
-keymap('n', '<leader>D', ':lua vim.lsp.buf.declaration()<CR>', opts)
--- keymap('n', '<leader>i', ':lua vim.lsp.buf.implementation()<CR>', opts)
-keymap('n', '<leader>i', ':lua vim.lsp.buf.hover()<CR>', opts)
-keymap('n', '<leader>r', ':lua vim.lsp.buf.references()<CR>', opts)
-keymap('n', '<leader>p', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-keymap('n', '<space>,', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-
-
-keymap('n', '<leader>.', ':Telescope lsp_document_symbols<CR>', opts)
-
--- local cmp = require'cmp'
--- cmp.mapping = {
---   ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
---   ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
---   -- ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
---   -- ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
---   ['<C-b>'] = cmp.mapping.scroll_docs(-4),
---   ['<C-f>'] = cmp.mapping.scroll_docs(4),
---   ['<C-Space>'] = cmp.mapping.complete(),
---   ['<C-e>'] = cmp.mapping.close(),
---   ['<CR>'] = cmp.mapping.confirm({
---     behavior = cmp.ConfirmBehavior.Replace,
---     select = true,
---   })
--- }
-
-
+keymap('n', '<c-f>', ':Telescope current_buffer_fuzzy_find<CR>', opts)
 
