@@ -3,10 +3,8 @@ vim.cmd [[
   filetype plugin indent on
 ]]
 
-
 -- set completeopt=menu,menuone,noselect
-local opt = vim.o
-local bopt = vim.bo
+local opt = vim.opt
 local g = vim.g
 
 vim.opt_global.shortmess:remove("F")
@@ -32,16 +30,19 @@ opt.relativenumber = true
 -- 2. Set 'tabstop' and 'shiftwidth' to whatever you prefer and use 'expandtab'.
 -- This way you will always insert spaces.
 -- The formatting will never be messed up when 'tabstop' is changed.
-opt.showtabline = 1
+opt.showtabline = 2
 opt.tabstop = 2
 -- opt.softtabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.smarttab = true
-opt.autoindent = true
+-- opt.autoindent = true
 opt.smartindent = true
+opt.scrolloff = 8
+opt.sidescrolloff = 8
 
 opt.number = true
+--tpt.timeoutlen = 100
 opt.clipboard = 'unnamedplus'
 opt.title = true
 opt.smartcase = true
