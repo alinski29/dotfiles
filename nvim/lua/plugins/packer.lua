@@ -1,79 +1,39 @@
-vim.cmd [[packadd packer.nvim]]
+vim.cmd([[packadd packer.nvim]])
 
-return require('packer').startup(function()
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
- 
-  -- Colorscheme
-  -- use {'dracula/vim', as = 'dracula'}
-  -- use 'shaunsingh/nord.nvim'
-  use 'navarasu/onedark.nvim'
+return require("packer").startup(function(use)
+  use("wbthomason/packer.nvim")
+  use("nvim-lua/plenary.nvim")
+  use("kyazdani42/nvim-web-devicons")
+  use("nvim-telescope/telescope.nvim") -- Fuzzy finder, file navigator
+  use("navarasu/onedark.nvim") -- Theme
+  use("nvim-lualine/lualine.nvim") -- Status line
+  use("akinsho/bufferline.nvim") -- Buffers at the top of the screen
+  use("kyazdani42/nvim-tree.lua") -- Tree-like navigation
+  use("windwp/nvim-autopairs")
+  use("akinsho/toggleterm.nvim")
+  use("lewis6991/gitsigns.nvim")
+  use("satabin/hocon-vim")
 
-  -- use({
-  --     'rose-pine/neovim',
-  --     as = 'rose-pine',
-  --     tag = 'v0.1.0', -- Optional tag release
-  --     config = function()
-  --         vim.cmd('colorscheme rose-pine')
-  --     end
-  --})
-  
-
-  -- Better syntax highlighting
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ":TSUpdate"
-  }
-
-  -- Fuzzy finder, file navigator
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
-
-  -- Status line
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true}
-  }
-
-  -- Buffers at the top of the screen
-  use {
-    'akinsho/bufferline.nvim',
-    requires = 'kyazdani42/nvim-web-devicons'
-  }
-
-  use {
-    'numToStr/Comment.nvim',
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- syntax highlighting
+  use({
+    "numToStr/Comment.nvim",
     config = function()
-        require('Comment').setup()
-    end
-  }
+      require("Comment").setup()
+    end,
+  })
 
-  use {'neovim/nvim-lspconfig'}
- 
+  -- LSP
+  use("neovim/nvim-lspconfig") -- Used for setting up language servers
+  use("jose-elias-alvarez/null-ls.nvim") -- Formatter and linter
+  use("scalameta/nvim-metals")
   -- Autocompletion
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-nvim-lua'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-cmdline'
-  use 'ray-x/cmp-treesitter'
-  use 'onsails/lspkind-nvim'
-  use 'L3MON4D3/LuaSnip'
-  
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons', -- optional, for file icon
-    },
- }
- 
-  use 'windwp/nvim-autopairs'
-
-  -- Terminal
-  use {"akinsho/toggleterm.nvim"}
-
-  use({'scalameta/nvim-metals', requires = { "nvim-lua/plenary.nvim" }})
+  use("hrsh7th/nvim-cmp")
+  use("hrsh7th/cmp-buffer")
+  use("hrsh7th/cmp-path")
+  use("hrsh7th/cmp-nvim-lua")
+  use("hrsh7th/cmp-nvim-lsp")
+  use("hrsh7th/cmp-cmdline")
+  use("ray-x/cmp-treesitter")
+  use("onsails/lspkind-nvim")
+  use("L3MON4D3/LuaSnip")
 end)

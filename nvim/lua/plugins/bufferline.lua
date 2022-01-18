@@ -1,19 +1,19 @@
-require('bufferline').setup {
+require("bufferline").setup({
   options = {
-    numbers = 'none', -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-    close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
+    numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
+    close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
     right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-    left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
-    middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
+    left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
+    middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
     -- NOTE: this plugin is designed with this icon in mind,
     -- and so changing this is NOT recommended, this is intended
     -- as an escape hatch for people who cannot bear it for whatever reason
-    indicator_icon = '▎',
-    buffer_close_icon = '',
-    modified_icon = '●',
-    close_icon = '',
-    left_trunc_marker = '',
-    right_trunc_marker = '',
+    indicator_icon = "▎",
+    buffer_close_icon = "",
+    modified_icon = "●",
+    close_icon = "",
+    left_trunc_marker = "",
+    right_trunc_marker = "",
     --- name_formatter can be used to change the buffer's label in the bufferline.
     --- Please note some names can/will break the
     --- bufferline so use this at your discretion knowing that it has
@@ -52,7 +52,7 @@ require('bufferline').setup {
     --     return true
     --   end
     -- end,
-    offsets = {{filetype = "NvimTree", text = "File Explorer", padding = 1, text_align = "center"  }},
+    offsets = { { filetype = "NvimTree", text = "File Explorer", padding = 1, text_align = "center" } },
     show_buffer_icons = true,
     show_buffer_close_icons = true,
     show_close_icon = true,
@@ -60,7 +60,7 @@ require('bufferline').setup {
     persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
     -- can also be a table containing 2 custom separators
     -- [focused and unfocused]. eg: { '|', '|' }
-    separator_style = 'thick',
+    separator_style = "thick",
     enforce_regular_tabs = true,
     always_show_bufferline = true,
     --[[ sort_by = 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
@@ -77,7 +77,6 @@ require('bufferline').setup {
       guifg = { attribute = "fg", highlight = "TabLine" },
       guibg = { attribute = "bg", highlight = "TabLine" },
     },
-
     -- buffer_selected = {
     --   guifg = {attribute='fg',highlight='#ff0000'},
     --   guibg = {attribute='bg',highlight='#0000ff'},
@@ -100,7 +99,6 @@ require('bufferline').setup {
     --   guifg = {attribute='fg',highlight='TabLineSel'},
     --   guibg ={attribute='bg',highlight='TabLineSel'}
     --   },
-
     tab_selected = {
       guifg = { attribute = "fg", highlight = "Normal" },
       guibg = { attribute = "bg", highlight = "Normal" },
@@ -114,7 +112,6 @@ require('bufferline').setup {
       guifg = { attribute = "fg", highlight = "TabLineSel" },
       guibg = { attribute = "bg", highlight = "Normal" },
     },
-
     duplicate_selected = {
       guifg = { attribute = "fg", highlight = "TabLineSel" },
       guibg = { attribute = "bg", highlight = "TabLineSel" },
@@ -130,7 +127,6 @@ require('bufferline').setup {
       guibg = { attribute = "bg", highlight = "TabLine" },
       gui = "italic",
     },
-
     modified = {
       guifg = { attribute = "fg", highlight = "TabLine" },
       guibg = { attribute = "bg", highlight = "TabLine" },
@@ -143,7 +139,6 @@ require('bufferline').setup {
       guifg = { attribute = "fg", highlight = "TabLine" },
       guibg = { attribute = "bg", highlight = "TabLine" },
     },
-
     separator = {
       guifg = { attribute = "bg", highlight = "TabLine" },
       guibg = { attribute = "bg", highlight = "TabLine" },
@@ -160,5 +155,5 @@ require('bufferline').setup {
       guifg = { attribute = "fg", highlight = "LspDiagnosticsDefaultHint" },
       guibg = { attribute = "bg", highlight = "Normal" },
     },
-  }
-}
+  },
+})
