@@ -12,10 +12,6 @@ echo $packer_path
 function check_packer_installation() {
   if [[ -d "$packer_path" ]]; then
     echo "Packer already installed"
-  #  if [[ ! -d "$local_path" ]] && [[ ! -L $local_path ]]; then 
-  #    [ ! -d "~/.local/share/nvim/site/pack" ] && mkdir ~/.local/share/nvim/site/pack
-  #    ln -s $global_path $local_path
-  #  fi
     packer_installed=1
   else 
     echo "Packer is not installed. Will attempt to install it"
@@ -135,8 +131,7 @@ function go_lsp_setup() {
 }
 
 
-check_packer_installation
-echo $packer_installed
+# check_packer_installation
 if [[ packer_installed -eq 0 ]]; then 
   install_packer
 fi
