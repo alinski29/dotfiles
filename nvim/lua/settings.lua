@@ -1,52 +1,47 @@
-vim.cmd [[
+vim.cmd([[
   syntax on
   filetype plugin indent on
-]]
+  set whichwrap+=<,>,h,l,[,]
+]])
 
--- set completeopt=menu,menuone,noselect
-local opt = vim.opt
-local g = vim.g
+local opts = {
+  background = "dark",
+  hidden = true,
+  fileencoding = "utf-8",
+  cmdheight = 2,
+  ruler = true,
+  mouse = "a",
+  splitbelow = true,
+  splitright = true,
+  cursorline = true,
+  relativenumber = true,
+  -- 2. Set 'tabstop' and 'shiftwidth' to whatever you prefer and use 'expandtab'.
+  -- This way you will always insert spaces.
+  -- The formatting will never be messed up when 'tabstop' is changed.
+  tabstop = 2,
+  updatetime = 500,
+  shiftwidth = 2,
+  expandtab = true,
+  smarttab = true,
+  smartindent = true,
+  scrolloff = 8,
+  sidescrolloff = 8,
+  number = true,
+  timeoutlen = 500,
+  clipboard = "unnamedplus",
+  title = true,
+  smartcase = true,
+  ignorecase = true,
+  termguicolors = true,
+  wildmenu = true,
+  wildignore = "*/node_modules/*,*/.git/*,DS_Store,*/venv/*,*/__pycache__/*,*.pyc,*/.idea/*,*/.vscode/*",
+  completeopt = { "menu", "menuone", "noselect" },
+}
 
-vim.opt_global.shortmess:remove("F")
+local g = vim.opt_global
+g.shortmess:remove("F") -- required by scala metals
+g.completeopt = "menu,menuone,noselect"
 
-g.completeopt='menu,menuone,noselect'
-opt.completeopt='menu,menuone,noselect'
-
-g.mapleader = ' '
--- Theming
--- g.onedark_style = 'cool'
-opt.background = 'dark'
-opt.showtabline=2
-opt.hidden = true
-opt.encoding = 'utf-8'
-opt.fileencoding = 'utf-8'
-opt.ruler = true
-opt.mouse = 'a'
-opt.splitbelow = true
-opt.splitright = true
-opt.cursorline = true
-opt.relativenumber = true
-
--- 2. Set 'tabstop' and 'shiftwidth' to whatever you prefer and use 'expandtab'.
--- This way you will always insert spaces.
--- The formatting will never be messed up when 'tabstop' is changed.
-opt.showtabline = 2
-opt.tabstop = 2
--- opt.softtabstop = 2
-opt.shiftwidth = 2
-opt.expandtab = true
-opt.smarttab = true
--- opt.autoindent = true
-opt.smartindent = true
-opt.scrolloff = 8
-opt.sidescrolloff = 8
-
-opt.number = true
---tpt.timeoutlen = 100
-opt.clipboard = 'unnamedplus'
-opt.title = true
-opt.smartcase = true
-opt.ignorecase = true
-opt.termguicolors = true
-opt.wildmenu = true
-opt.wildignore = '*/node_modules/*,*/.git/*,DS_Store,*/venv/*,*/__pycache__/*,*.pyc,*/.idea/*,*/.vscode/*'
+for k, v in pairs(opts) do
+  vim.opt[k] = v
+end
