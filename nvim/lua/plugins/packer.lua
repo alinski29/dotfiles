@@ -38,6 +38,7 @@ return packer.startup(function(use)
   use("kyazdani42/nvim-web-devicons")
   use("nvim-telescope/telescope.nvim") -- Fuzzy finder, file navigator
   use("navarasu/onedark.nvim") -- Theme
+  use("EdenEast/nightfox.nvim") -- Theme
   use("nvim-lualine/lualine.nvim") -- Status line
   use("akinsho/bufferline.nvim") -- Buffers at the top of the screen
   use("kyazdani42/nvim-tree.lua") -- Tree-like navigation

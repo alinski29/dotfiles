@@ -3,6 +3,9 @@ require("lualine").setup({
     icons_enabled = true,
     -- Themes here: https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
     theme = "codedark",
+    -- theme = "everforest",
+    -- theme = "nightfox",
+    -- theme = "iceberg_dark",
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     disabled_filetypes = {},
@@ -12,7 +15,7 @@ require("lualine").setup({
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff", "diagnostics" },
     lualine_c = { "filename" },
-    lualine_x = { "encoding", "fileformat", "filetype" },
+    lualine_x = { "encoding", "filetype" },
     lualine_y = { "progress" },
     lualine_z = { "location" },
   },
