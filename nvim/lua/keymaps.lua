@@ -9,8 +9,10 @@ local opts = { noremap = true, silent = true }
 --    term = "t"
 --    command = "c"
 
+vim.g.mapleader = " "
+
 keymap("n", "<leader>vr", ":source ~/.config/nvim/init.lua<CR>", opts)
-keymap("n", "<leader>h", ":nohls", opts) -- turn off highligting after search
+keymap("n", "<leader>h", ":nohls<CR>", opts) -- turn off highligting after search
 
 keymap("i", "jk", "<esc>", opts)
 keymap("i", "kj", "<esc>", opts)
