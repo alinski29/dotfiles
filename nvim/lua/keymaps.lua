@@ -16,6 +16,13 @@ keymap("n", "<leader>h", ":nohls<CR>", opts) -- turn off highligting after searc
 
 keymap("i", "jk", "<esc>", opts)
 keymap("i", "kj", "<esc>", opts)
+-- Go to first or last character from insert mode
+keymap("i", "<A-h>", "<esc>^i", opts)
+keymap("i", "<A-l>", "<esc>g_a", opts)
+keymap("i", "<A-k>", "<esc>ka", opts)
+keymap("i", "<A-j>", "<esc>ja", opts)
+keymap("i", "<A-o>", "<esc>o", opts)
+
 
 -- Keep selection when identing / outdenting in visual mode
 keymap("v", "<", "<gv", {})
