@@ -11,7 +11,16 @@ require("telescope").setup({
       "*.arrow",
       "**/*.arrow",
       "*/.vscode/*",
+      -- scala stuff
       "*/.idea/*",
+      "*/.project/*",
+      "*/.bloop/*",
+      "*/.bsp/*",
+      "*/.metals/*",
+      "project/project/*",
+      "project/target/*",
+      "target/*",
+      "!target/scala-*/",
     },
     prompt_prefix = "$ ",
     mappings = {
