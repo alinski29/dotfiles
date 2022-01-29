@@ -16,8 +16,8 @@ require("lspkind").init({
   -- default: {}
   symbol_map = {
     Text = "",
-    Method = "()",
-    Function = "()",
+    Method = "",
+    Function = "",
     Constructor = "",
     Field = "ﰠ",
     Variable = "",
@@ -39,6 +39,6 @@ require("lspkind").init({
     Struct = "פּ",
     Event = "",
     Operator = "",
-    TypeParameter = "",
+    TypeParameter = "T",
   },
 })
