@@ -47,6 +47,7 @@ return packer.startup(function(use)
   use("lewis6991/gitsigns.nvim")
   use("satabin/hocon-vim")
   use("tpope/vim-fugitive")
+  use("norcalli/nvim-colorizer.lua")
 
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- syntax highlighting
   use({
