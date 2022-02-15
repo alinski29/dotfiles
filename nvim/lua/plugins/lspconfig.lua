@@ -48,7 +48,7 @@ local lsp_set_keymaps = function(bufnr)
   buf_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
 end
 
-local lsp_settings = function()
+local lsp_settings = function(client)
   local signs = {
     { name = "DiagnosticSignError", text = "" },
     { name = "DiagnosticSignWarn", text = "" },
@@ -60,14 +60,30 @@ local lsp_settings = function()
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
   end
 
+  local function set_lsp_diagnostics(client_name)
+    if client_name == "julials" then
+      return function(namespace, buffnr)
+        return {
+          severity = vim.diagnostic.severity.WARN,
+        }
+      end
+    else
+      return function(namespace, buffnr)
+        return true
+      end
+    end
+  end
+
   vim.diagnostic.config({
-    virtual_text = false,
-    -- show signs
+    underline = set_lsp_diagnostics("julials"),
+    virtual_text = set_lsp_diagnostics("julials"),
+    -- virtual_text = true,
+    -- -- show signs
     signs = {
       active = signs,
+      severity = vim.diagnostic.severity.WARN,
     },
     update_in_insert = true,
-    underline = true,
     severity_sort = true,
     float = {
       focusable = false,
