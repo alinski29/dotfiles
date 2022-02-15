@@ -11,11 +11,11 @@ cmp.setup({
     completeopt = "menu,menuone,noselect",
   },
   sources = {
-    { name = "nvim_lsp" },
+    { name = "nvim_lsp" , keyword_length = 4},
     { name = "nvim_lua", keyword_length = 5 },
     { name = "treesitter", keyword_length = 5 },
-    { name = "luasnip" },
-    { name = "path" },
+    { name = "luasnip", keyword_length = 1 },
+    { name = "path", keyword_length = 4 },
     { name = "buffer", keyword_length = 5 },
   },
   formatting = {
