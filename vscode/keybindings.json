@@ -13,7 +13,8 @@
 	},
 	{
 		"key": "alt+l",
-		"command": "workbench.action.navigateRight"
+		"command": "workbench.action.navigateRight",
+		"when": "vim.mode == 'Normal'"
 	},
 	{
 		"key": "alt+k",
@@ -335,7 +336,8 @@
 	},
 	{
 		"key": "shift+alt+l",
-		"command": "workbench.action.moveEditorToRightGroup"
+		"command": "workbench.action.moveEditorToRightGroup",
+		"when": "vim.mode == 'Normal'"
 	},
 	{
 		"key": "shift+alt+h",
@@ -724,6 +726,11 @@
 	},
 	{
 		"key": "ctrl+shift+/",
+		"command": "editor.action.blockComment",
+		"when": "editorTextFocus && !editorReadonly && vim.mode != 'Insert'"
+	},
+	{
+		"key": "g b c",
 		"command": "editor.action.blockComment",
 		"when": "editorTextFocus && !editorReadonly && vim.mode != 'Insert'"
 	},
@@ -1166,22 +1173,22 @@
 		"when": "editorHasSignatureHelpProvider && editorTextFocus"
 	},
 	{
-		"key": "space i",
+		"key": "shift+k",
 		"command": "editor.action.showHover",
 		"when": "editorTextFocus && vim.mode == 'Normal'"
 	},
 	{
-		"key": "space d",
+		"key": "g d",
 		"command": "editor.action.peekDefinition",
 		"when": "editorHasDefinitionProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor && vim.mode == 'Normal'"
 	},
 	{
-		"key": "space p",
+		"key": "ctrl+k",
 		"command": "editor.action.triggerParameterHints",
 		"when": "editorHasSignatureHelpProvider && editorTextFocus && vim.mode == 'Normal'"
 	},
 	{
-		"key": "space r",
+		"key": "g r",
 		"command": "editor.action.referenceSearch.trigger",
 		"when": "editorTextFocus && vim.mode == 'Normal'"
 	},
@@ -1206,7 +1213,7 @@
 		"when": "editorHasCallHierarchyProvider"
 	},
 	{
-		"key": "space shift+d",
+		"key": "g shift+d",
 		"command": "editor.action.revealDefinition",
 		"when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor && vim.mode == 'Normal'"
 	},
@@ -1270,6 +1277,11 @@
 	},
 	{
 		"key": "ctrl+/",
+		"command": "editor.action.commentLine",
+		"when": "editorTextFocus && !editorReadonly && vim.mode != 'Insert'"
+	},
+	{
+		"key": "g c c",
 		"command": "editor.action.commentLine",
 		"when": "editorTextFocus && !editorReadonly && vim.mode != 'Insert'"
 	},
@@ -1379,5 +1391,111 @@
 		"key": "space shift+]",
 		"command": "editor.unfoldAll",
 		"when": "editorTextFocus && foldingEnabled && vim.mode == 'Normal'"
+	},
+	{
+		"key": "ctrl+\\",
+		"command": "workbench.action.terminal.toggleTerminal",
+		"when": "terminal.active && vim.mode != 'Insert'"
+	},
+	{
+		"key": "ctrl+`",
+		"command": "-workbench.action.terminal.toggleTerminal",
+		"when": "terminal.active"
+	},
+	{
+		"key": "g i",
+		"command": "editor.action.peekImplementation",
+		"when": "editorHasImplementationProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor && vim.mode == 'Normal'"
+	},
+	{
+		"key": "ctrl+shift+f12",
+		"command": "-editor.action.peekImplementation",
+		"when": "editorHasImplementationProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+	},
+	{
+		"key": "g shift+i",
+		"command": "editor.action.goToImplementation",
+		"when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor && vim.mode == 'Normal'"
+	},
+	{
+		"key": "ctrl+f12",
+		"command": "-editor.action.goToImplementation",
+		"when": "editorHasImplementationProvider && editorTextFocus && !isInEmbeddedEditor"
+	},
+	{
+		"key": "g shift+r",
+		"command": "editor.action.goToReferences",
+		"when": "editorHasReferenceProvider && editorTextFocus && vim.mode = 'Normal' && !inReferenceSearchEditor && !isInEmbeddedEditor"
+	},
+	{
+		"key": "shift+f12",
+		"command": "-editor.action.goToReferences",
+		"when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+	},
+	{
+		"key": "space f",
+		"command": "editor.action.formatDocument",
+		"when": "editorHasDocumentFormattingProvider && editorTextFocus && vim.mode = 'Normal' && !editorReadonly && !inCompositeEditor"
+	},
+	{
+		"key": "ctrl+shift+i",
+		"command": "-editor.action.formatDocument",
+		"when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
+	},
+	{
+		"key": "ctrl+shift+i",
+		"command": "-editor.action.formatDocument.none",
+		"when": "editorTextFocus && !editorHasDocumentFormattingProvider && !editorReadonly"
+	},
+	{
+		"key": "alt+l",
+		"command": "-toggleSearchEditorContextLines",
+		"when": "inSearchEditor"
+	},
+	{
+		"key": "alt+l",
+		"command": "-toggleFindInSelection",
+		"when": "editorFocus"
+	},
+	// VIM remappings
+	{
+  	"key": "alt+l",
+  	"command": "vim.remap",
+  	"when": "inputFocus && vim.mode == 'Insert'",
+  	"args": {
+    	"after": ["<Esc>", "$", "a"]
+  	}
+	},
+	{
+  	"key": "alt+h",
+  	"command": "vim.remap",
+  	"when": "inputFocus && vim.mode == 'Insert'",
+  	"args": {
+    	"after": ["<Esc>", "^", "i"]
+  	}
+	},
+	{
+  	"key": "alt+o",
+  	"command": "vim.remap",
+  	"when": "inputFocus && vim.mode == 'Insert'",
+  	"args": {
+    	"after": ["<Esc>", "o"]
+  	}
+	},
+	{
+  	"key": "alt+k",
+  	"command": "vim.remap",
+  	"when": "inputFocus && vim.mode == 'Insert'",
+  	"args": {
+    	"after": ["<Esc>", "k", "a"]
+  	}
+	},
+	{
+  	"key": "alt+j",
+  	"command": "vim.remap",
+  	"when": "inputFocus && vim.mode == 'Insert'",
+  	"args": {
+    	"after": ["<Esc>", "j", "a"]
+  	}
 	}
 ]

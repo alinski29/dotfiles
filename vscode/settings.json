@@ -21,7 +21,7 @@
     "julia.execution.codeInREPL": true,
     "julia.execution.resultType": "inline",
     "julia.symbolCacheDownload": true,
-    "workbench.colorTheme": "One Dark Pro",
+    "workbench.colorTheme": "Atom One Dark",
     "editor.fontSize": 13,
     "editor.tabSize": 2,
     "editor.guides.indentation": false,
@@ -36,15 +36,40 @@
     "notebook.lineNumbers": "on",
     "zenMode.hideLineNumbers": false,
     "search.showLineNumbers": true,
-    // Vim 
-    "vim.enableNeovim": true,
-    "vim.neovimUseConfigFile": true,
     "vim.neovimPath": "/usr/bin/nvim",
     "vim.useSystemClipboard": true,
     "vim.handleKeys": {
+        //"<A-l>": true,
         "<C-a>": true,
         "<C-g>": false
     },
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "k"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["k", "j"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["k", "k"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.normalModeKeyBindings": [
+        {
+            "before": ["<leader>", "h"],
+            "commands": [
+                ":nohls"
+            ],
+            "siltent": true
+        }
+    ],
     "vim.visualModeKeyBindingsNonRecursive": [
         {
             "before": [
@@ -98,11 +123,28 @@
         "statusBar.debuggingForeground": "#000"
     },
     "[julia]": {
-        "editor.defaultFormatter": "julialang.language-julia"
+        "editor.defaultFormatter": "singularitti.vscode-julia-formatter"
     },
     "editor.cursorSmoothCaretAnimation": true,
     "editor.cursorBlinking": "smooth",
     "workbench.iconTheme": "material-icon-theme",
     "julia.enableCrashReporter": false,
-    "extensions.ignoreRecommendations": true
+    "extensions.ignoreRecommendations": true,
+    "vim.neovimUseConfigFile": true,
+    "vim.neovimConfigPath": "~/config/nvim/init.lua",
+    "juliaFormatter.alwaysForIn": true,
+    "juliaFormatter.indent": 2,
+    "juliaFormatter.removeExtraNewlines": true,
+    "juliaFormatter.whitespaceOpsInIndices": true,
+    "juliaFormatter.whitespaceTypedefs": true,
+    "vim.enableNeovim": true,
+    "vim.foldfix": true,
+    "vim.leader": "\\<space>",
+    "juliaFormatter.alignStructField": true,
+    "juliaFormatter.style": "blue",
+    "markdown.extension.tableFormatter.normalizeIndentation": true,
+    "juliaFormatter.alwaysUseReturn": true,
+    "juliaFormatter.formatDocstrings": true,
+    "juliaFormatter.importToUsing": true,
+    "markdown.extension.toc.updateOnSave": false
 }
