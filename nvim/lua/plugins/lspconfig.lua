@@ -187,7 +187,7 @@ local specific_opts = {
       showImplicitArguments = true,
       excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
       serverVersion = "0.10.9+133-9aae968a-SNAPSHOT",
-      javaHome = "/usr/lib/jvm/java-8-openjdk-amd64",
+      javaHome = "/usr/lib/jvm/default",
     },
   },
 }
