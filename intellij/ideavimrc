@@ -1,5 +1,5 @@
 set surround
-source ~/.config/nvim/commons.vim
+source ~/.config/nvim-vimscript/init.vim
 
 
 " Navigate tabs
@@ -62,14 +62,14 @@ set idearefactormode=keep
 
 nnoremap <space>, :action RenameElement<cr>
 nnoremap <space>i :action QuickJavaDoc<cr>
-nnoremap <space>d :action QuickImplementations<cr>
+nnoremap gi :action QuickImplementations<cr>
 nnoremap <space>t :action QuickTypeDefinition<cr>
+nnoremap <space><S-t> :action GotoTypeDeclaration<cr>
 nnoremap <space>. :action FileStructurePopup<cr>
 nnoremap <space>h :action CallHierarchy<cr>
-nnoremap <space>p :action ParameterInfo<cr>
-nnoremap <space>r :action FindUsages<cr>
-nnoremap <space><S-d> :action GotoDeclaration<cr>
-nnoremap <space><S-t> :action GotoTypeDeclaration<cr>
-nnoremap <space><S-r> :action FindUsages<cr>
+nnoremap <C-k> :action ParameterInfo<cr>
+nnoremap gr :action FindUsages<cr>
+nnoremap gd :action GotoDeclaration<cr>
+nnoremap <space>f :action ReformatFile<cr>
 sethandler <C-p> n-v:idea i:vim
 sethandler <C-q> n-v idea i:vim
