@@ -21,7 +21,7 @@
     "julia.execution.codeInREPL": true,
     "julia.execution.resultType": "inline",
     "julia.symbolCacheDownload": true,
-    "workbench.colorTheme": "Atom One Dark",
+    "workbench.colorTheme": "One Dark Pro Mix",
     "editor.fontSize": 13,
     "editor.tabSize": 2,
     "editor.guides.indentation": false,
