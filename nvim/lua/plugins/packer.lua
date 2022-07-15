@@ -13,7 +13,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.cmd([[packadd packer.nvim]])
 end
 
--- Reload vim cionfiguration of every sync to packer.lua
+-- Reload vim configuration of every sync to packer.lua
 vim.cmd([[
   augroup packer_user_config
     autocmd!
