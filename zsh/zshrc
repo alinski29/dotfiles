@@ -131,7 +131,7 @@ export XDG_DATA_DIRS=/usr/local/share:/usr/share
 export XDG_CONFIG_DIRS=/etc/xdg
 
 export CONDA_HOME=$XDG_DATA_HOME/miniconda3
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/default
 # export GO_HOME=/usr/local/go/bin
 export GOPATH=$XDG_DATA_HOME/go
 export GOBIN=$XDG_DATA_HOME/go/bin
@@ -168,17 +168,17 @@ export JOPLIN_HOME=/opt/joplin
 source "$XDG_CONFIG_HOME/secrets.env"
 
 
-__conda_setup="$('/home/alinski/.local/share/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$XDG_DATA_HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "$XDG_DATA_HOME/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="${XDG_DATA_HOME}/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+#__conda_setup="$('/home/alinski/.local/share/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "$XDG_DATA_HOME/miniconda3/etc/profile.d/conda.sh" ]; then
+#        . "$XDG_DATA_HOME/miniconda3/etc/profile.d/conda.sh"
+#    else
+#        export PATH="${XDG_DATA_HOME}/miniconda3/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
 
 export PATH=/usr/local/bin:/home/$USER/.local/bin:$JAVA_HOME/bin:$ZOE_HOME:$CONDA_HOME/bin:$CQLSH_HOME:$PYCHARM_INSTALL_HOME/bin:$IDEA_INSTALL_HOME/bin:$JOPLIN_HOME/bin:$GOLAND_HOME/bin:$GOBIN:/home/$USER/.local/bin/inspyctrum:$PATH
 

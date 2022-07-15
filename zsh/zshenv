@@ -1,3 +1,5 @@
-source "$HOME/.config/cargo/env"
+#source "$HOME/.config/cargo/env"
 export ZDOTDIR=$HOME/.config/zsh
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
+export HISTSIZE=2000
+export SAVEHIST=2000
