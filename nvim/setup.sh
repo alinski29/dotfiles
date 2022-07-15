@@ -130,12 +130,28 @@ function go_lsp_setup() {
   fi
 }
 
+function install_coursier() {
+  if [[ ! -x "$(command -v coursier)" ]]; then 
+    if [[ $base_distribution == "arch" ]]; then
+     git clone https://aur.archlinux.org/packages/coursier.git
+     cd coursier
+     makepkg -si
+     cd .. && rm -rf coursier
+    else
+      curl -fL https://github.com/coursier/launchers/raw/master/cs-x86_64-pc-linux.gz | gzip -d > cs
+      chmod +x cs
+      ./cs setup
+    fi
+  fi
+}
+
 
 # check_packer_installation
 if [[ packer_installed -eq 0 ]]; then 
   install_packer
 fi
 install_ripgrep
+install_coursier
 echo "Now enter nvim and run :PackerSync"
 julia_lsp_setup
 bash_lsp_setup
