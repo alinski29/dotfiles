@@ -2,6 +2,7 @@ vim.cmd([[
   syntax on
   filetype plugin indent on
   set whichwrap+=<,>,h,l,[,]
+  set clipboard^=unnamed,unnamedplus
 ]])
 
 local opts = {
