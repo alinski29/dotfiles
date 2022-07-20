@@ -48,6 +48,7 @@ return packer.startup(function(use)
   use("satabin/hocon-vim")
   use("tpope/vim-fugitive")
   use("norcalli/nvim-colorizer.lua")
+  use("lukas-reineke/indent-blankline.nvim")
 
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- syntax highlighting
   use({
