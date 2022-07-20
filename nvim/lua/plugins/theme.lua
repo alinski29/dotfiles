@@ -1,7 +1,7 @@
 local theme = require("onedark")
 -- local theme = require("nightfox")
 theme.setup({
-  style = "warm",
+  style = "darker",
 })
 -- theme.setup({
 --   fox = "duskfox",  -- change the colorscheme to use nordfox
