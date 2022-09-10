@@ -1,4 +1,5 @@
 local lsp = require("lspconfig")
+-- local navic = require("nvim-navic")
 local lspconfig_capabilities = vim.lsp.protocol.make_client_capabilities()
 local capabilities = require("cmp_nvim_lsp").update_capabilities(lspconfig_capabilities)
 
@@ -37,8 +38,8 @@ local lsp_set_keymaps = function(bufnr)
   buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
   buf_set_keymap("n", "<space>,", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   -- buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap("n", "<space>ca", "<cmd>Telescope code_actions()<CR>", opts)
-  -- buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  -- buf_set_keymap("n", "<space>ca", "<cmd>Telescope code_actions()<CR>", opts)
+  buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   buf_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   buf_set_keymap("n", "<space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
   buf_set_keymap("n", "<space>.", "<cmd>Telescope lsp_document_symbols<CR>", opts)
@@ -70,14 +71,18 @@ local lsp_settings = function(client)
     else
       return function(namespace, buffnr)
         return true
+        -- return {
+        --   severity = vim.diagnostic.severity.WARN,
+        -- }
       end
     end
   end
 
   vim.diagnostic.config({
-    underline = set_lsp_diagnostics("julials"),
-    virtual_text = set_lsp_diagnostics("julials"),
-    -- virtual_text = true,
+    underline = true,
+    -- underline = set_lsp_diagnostics("julials"),
+    -- virtual_text = set_lsp_diagnostics("julials"),
+    virtual_text = true,
     -- -- show signs
     signs = {
       active = signs,
@@ -115,6 +120,7 @@ local on_attach = function(client, bufnr)
   lsp_set_keymaps(bufnr)
   lsp_settings(client)
   lsp_highlight_document(client)
+  -- navic.attach(client, bufnr)
 end
 
 local generic_opts = {

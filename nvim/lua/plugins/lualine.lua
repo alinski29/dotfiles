@@ -2,9 +2,9 @@ require("lualine").setup({
   options = {
     icons_enabled = true,
     -- Themes here: https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
-    theme = "codedark",
+    -- theme = "codedark",
     -- theme = "everforest",
-    -- theme = "nightfox",
+    theme = "nightfox",
     -- theme = "iceberg_dark",
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },

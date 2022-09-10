@@ -13,6 +13,9 @@ require("nvim-tree").setup({
     enable = true,
     auto_open = true,
   },
+  renderer = {
+    group_empty = true,
+  },
   diagnostics = {
     enable = false,
     icons = {
@@ -33,7 +36,7 @@ require("nvim-tree").setup({
   },
   filters = {
     dotfiles = false,
-    custom = {},
+    -- { custom = { "^.git$" } } -- hide the git folder
   },
   git = {
     enable = true,
@@ -41,11 +44,11 @@ require("nvim-tree").setup({
     timeout = 500,
   },
   view = {
-    width = 30,
+    width = 35,
     height = 30,
     hide_root_folder = false,
     side = "left",
-    auto_resize = false,
+    auto_resize = true,
     mappings = {
       custom_only = false,
       list = {

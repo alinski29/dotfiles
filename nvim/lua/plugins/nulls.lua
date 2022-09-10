@@ -17,6 +17,7 @@ null_ls.setup({
     formatting.yapf,
     formatting.stylua,
     formatting.gofmt, --gopls language server already supports formatting
+    -- formatting.scalafmt,
     -- diagnostics
     diagnostics.flake8,
   },

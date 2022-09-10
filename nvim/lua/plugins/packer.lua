@@ -49,6 +49,7 @@ return packer.startup(function(use)
   use("tpope/vim-fugitive")
   use("norcalli/nvim-colorizer.lua")
   use("lukas-reineke/indent-blankline.nvim")
+  -- use("SmiteshP/nvim-navic")
 
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- syntax highlighting
   use({
@@ -59,6 +60,8 @@ return packer.startup(function(use)
   })
 
   -- LSP
+  -- use("williamboman/mason.nvim")
+  -- use("williamboman/mason-lspconfig.nvim")
   use("neovim/nvim-lspconfig") -- Used for setting up language servers
   use("jose-elias-alvarez/null-ls.nvim") -- Formatter and linter
   use("scalameta/nvim-metals")
