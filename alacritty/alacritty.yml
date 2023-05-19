@@ -32,8 +32,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-    x: 6
-    y: 6
+    x: 1
+    y: 1
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -76,17 +76,17 @@ window:
   # Set this to `None` to use the default theme variant.
   #gtk_theme_variant: None
 
-scrolling:
-  # Maximum number of lines in the scrollback buffer.
-  # Specifying '0' will disable scrolling.
-  history: 5000
+  scrolling:
+    # Maximum number of lines in the scrollback buffer.
+    # Specifying '0' will disable scrolling.
+    history: 5000
 
-  # Number of lines the viewport will move for every line scrolled when
-  # scrollback is enabled (history > 0).
-  #multiplier: 3
+    # Number of lines the viewport will move for every line scrolled when
+    # scrollback is enabled (history > 0).
+    #multiplier: 3
 
-  # Scroll to the bottom when new text is written to the terminal.
-  #auto_scroll: false
+    # Scroll to the bottom when new text is written to the terminal.
+    #auto_scroll: false
 
 
 # Font configuration
@@ -99,13 +99,13 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    # family: Hack
-    family: FuraCode Nerd Font
-    family: FiraCode Nerd Font
-    family: FiraCode Nerd Font Mono
+    # family: Hack Nerd Font
+    # family: monospace
+    # family: FuraCode Nerd Font
+    # family: FiraCode Nerd Font
+    # family: FiraCode Nerd Font Mono
     family: JetBrains Mono Nerd Font
-    #family: SauceCodePro Nerd Font
-    family: RobotoMono Nerd Font
+    # family: RobotoMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -117,13 +117,15 @@ font:
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
     # family: Hack
-    family: FuraCode Nerd Font
-    family: FiraCode Nerd Font
-    family: FiraCode Nerd Font Mono
+    # family: monospace
+    # faimily: JetBrainsMono Nerd Font Mono
+    # family: FuraCode Nerd Font
+    # family: FiraCode Nerd Font
+    # family: FiraCode Nerd Font Mono
     family: JetBrains Mono Nerd Font
-    family: FiraCode Nerd Font
-    #family: SauceCodePro Nerd Font
-    family: RobotoMono Nerd Font
+    # family: FiraCode Nerd Font
+    # #family: SauceCodePro Nerd Font
+    # family: RobotoMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -134,14 +136,15 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    #family: Hack
-    family: FuraCode Nerd Font
-    family: FiraCode Nerd Font
-    family: FiraCode Nerd Font Mono
+    # family: Hack
+    # family: monospace
+    # family: FuraCode Nerd Font
+    # family: FiraCode Nerd Font
+    # family: FiraCode Nerd Font Mono
     family: JetBrains Mono Nerd Font
-    family: FiraCode Nerd Font
+    # family: FiraCode Nerd Font
     #family: SauceCodePro Nerd Font
-    family: RobotoMono Nerd Font
+    # family: RobotoMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -153,13 +156,13 @@ font:
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
     # family: Hack
-    family: FuraCode Nerd Font
-    family: FiraCode Nerd Font
-    family: FiraCode Nerd Font Mono
-    family: JetBrains Mono Nerd Font
-    family: FiraCode Nerd Font
-    #family: SauceCodePro Nerd Font
-    family: RobotoMono Nerd Font
+    # family: FuraCode Nerd Font
+    # family: FiraCode Nerd Font
+    # family: FiraCode Nerd Font Mono
+    family: JetBrains Nerd Font Mono
+    # family: FiraCode Nerd Font
+    # family: SauceCodePro Nerd Font
+    # family: RobotoMono Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
@@ -175,14 +178,14 @@ font:
 #tabspaces: 8
 
   # Point size
-  #size: 13.0
-  size: 12.4
+  size: 12
+  # size: 12.4
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
-    x: 1
-    y: 3
+    x: 2
+    y: 1
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the right,
@@ -409,7 +412,7 @@ font:
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
 # background_opacity: 0.99
-window.opacity: 0.98
+window.opacity: 0.999
 # background_opacity: 0.80
 
 #selection:
