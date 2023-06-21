@@ -12,7 +12,10 @@ lvim.builtin.breadcrumbs.active = true
 lvim.builtin.dap.active = true
 lvim.builtin.nvimtree.setup.renderer.group_empty = true
 lvim.builtin.project.manual_mode = true
+lvim.builtin.indentlines.active = false
+
 lvim.colorscheme = "catppuccin"
+require("catppuccin").setup({ flavour = "mocha", })
 
 local dap_status_ok, dap = pcall(require, "dap")
 if not dap_status_ok then

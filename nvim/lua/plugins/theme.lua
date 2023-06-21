@@ -1,16 +1,16 @@
--- local theme = require("onedark")
-local theme = require("nightfox")
--- theme.setup({
---   style = "warmer",
---   code_style = {
---     comments = "italic",
---     keywords = "none",
---     functions = "bold",
---     strings = "none",
---     variables = "none",
---   },
--- })
-theme.setup({
+local onedark = require("onedark")
+local nightfox = require("nightfox")
+onedark.setup({
+  style = "warmer",
+  code_style = {
+    comments = "italic",
+    keywords = "none",
+    functions = "bold",
+    strings = "none",
+    variables = "none",
+  },
+})
+nightfox.setup({
   options = {
     -- Compiled file's destination location
     compile_path = vim.fn.stdpath("cache") .. "/nightfox",

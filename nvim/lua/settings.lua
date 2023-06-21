@@ -41,7 +41,7 @@ local opts = {
 
 local g = vim.opt_global
 g.shortmess:remove("F") -- required by scala metals
-g.completeopt = "menu,menuone,noselect"
+g.completeopt = { "menu", "menuone" , "noselect" }
 
 for k, v in pairs(opts) do
   vim.opt[k] = v

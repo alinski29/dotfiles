@@ -5,6 +5,7 @@ lvim.plugins = {
   "olexsmir/gopher.nvim",
   "AckslD/swenv.nvim",
   "stevearc/dressing.nvim",
+  "nvim-tree/nvim-web-devicons",
   {
     "scalameta/nvim-metals",
     config = function()
