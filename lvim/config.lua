@@ -14,9 +14,9 @@ lvim.builtin.nvimtree.setup.renderer.group_empty = true
 lvim.builtin.project.manual_mode = true
 lvim.builtin.indentlines.active = false
 
--- require("catppuccin").setup({ flavour = "mocha", })
--- require("catppuccin").setup()
-lvim.colorscheme = "habamax"
+require("catppuccin").setup({ flavour = "mocha", })
+lvim.colorscheme = "catppuccin"
+vim.cmd.colorscheme "catppuccin"
 
 -- local dap_status_ok, dap = pcall(require, "dap")
 -- if not dap_status_ok then
