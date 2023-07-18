@@ -74,7 +74,7 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 keymap("n", "<c-b>", "<c-o>", opts)
 keymap("n", "<c-n>", "<c-i>", opts)
 
-keymap("n", "<c-e>", ":lua require'nvim-tree'.toggle(false, true)<CR>", opts)
+keymap("n", "<c-e>", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<c-o>", ":Telescope find_files<CR>", opts)
 keymap('n', '<c-f>', ':Telescope grep_string<CR>', opts)
 -- keymap("n", "<c-f>", ":Telescope current_buffer_fuzzy_find<CR>", opts)
@@ -101,7 +101,8 @@ keymap("n", "<space>,", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 keymap("n", "<space>.", "<cmd>Telescope lsp_document_symbols<CR>", opts)
 keymap("n", "<space>wd", "<cmd>Telescope diagnostics<CR>", opts)
 
-vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format { async = true } end, opts)
+-- vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format { async = true } end, opts)
+keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 -- keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 -- keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
 -- keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
@@ -117,23 +118,23 @@ vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format { async = true } e
 -- keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)ke
 
 lvim.builtin.gitsigns.opts.keymaps = {
-    noremap = true,
+  noremap = true,
 
-    ["n ]c"] = { expr = true, "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'" },
-    ["n [c"] = { expr = true, "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'" },
+  ["n ]c"] = { expr = true, "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'" },
+  ["n [c"] = { expr = true, "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'" },
 
-    ["n <leader>hs"] = "<cmd>Gitsigns stage_hunk<CR>",
-    ["v <leader>hs"] = ":Gitsigns stage_hunk<CR>",
-    ["n <leader>hu"] = "<cmd>Gitsigns undo_stage_hunk<CR>",
-    ["n <leader>hr"] = "<cmd>Gitsigns reset_hunk<CR>",
-    ["v <leader>hr"] = ":Gitsigns reset_hunk<CR>",
-    ["n <leader>hR"] = "<cmd>Gitsigns reset_buffer<CR>",
-    ["n <leader>hp"] = "<cmd>Gitsigns preview_hunk<CR>",
-    ["n <leader>hb"] = '<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
-    ["n <leader>hS"] = "<cmd>Gitsigns stage_buffer<CR>",
-    ["n <leader>hU"] = "<cmd>Gitsigns reset_buffer_index<CR>",
+  ["n <leader>hs"] = "<cmd>Gitsigns stage_hunk<CR>",
+  ["v <leader>hs"] = ":Gitsigns stage_hunk<CR>",
+  ["n <leader>hu"] = "<cmd>Gitsigns undo_stage_hunk<CR>",
+  ["n <leader>hr"] = "<cmd>Gitsigns reset_hunk<CR>",
+  ["v <leader>hr"] = ":Gitsigns reset_hunk<CR>",
+  ["n <leader>hR"] = "<cmd>Gitsigns reset_buffer<CR>",
+  ["n <leader>hp"] = "<cmd>Gitsigns preview_hunk<CR>",
+  ["n <leader>hb"] = '<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
+  ["n <leader>hS"] = "<cmd>Gitsigns stage_buffer<CR>",
+  ["n <leader>hU"] = "<cmd>Gitsigns reset_buffer_index<CR>",
 
-    -- Text objects
-    ["o ih"] = ":<C-U>Gitsigns select_hunk<CR>",
-    ["x ih"] = ":<C-U>Gitsigns select_hunk<CR>",
+  -- Text objects
+  ["o ih"] = ":<C-U>Gitsigns select_hunk<CR>",
+  ["x ih"] = ":<C-U>Gitsigns select_hunk<CR>",
 }

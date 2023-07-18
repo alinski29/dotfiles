@@ -6,10 +6,10 @@ lvim.plugins = {
   "AckslD/swenv.nvim",
   "stevearc/dressing.nvim",
   "nvim-tree/nvim-web-devicons",
-  {
-    "scalameta/nvim-metals",
-    config = function()
-      require("user.metals").config()
-    end,
-  },
+  -- {
+  --   "scalameta/nvim-metals",
+  --   config = function()
+  --     require("user.metals").config()
+  --   end,
+  -- },
 }

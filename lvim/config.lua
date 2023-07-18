@@ -1,7 +1,7 @@
 reload "user.options"
 reload "user.keymaps"
 reload "user.plugins"
-reload "user.metals"
+-- reload "user.metals"
 reload "user.telescope"
 reload "user.lsp.lsp"
 
@@ -14,29 +14,30 @@ lvim.builtin.nvimtree.setup.renderer.group_empty = true
 lvim.builtin.project.manual_mode = true
 lvim.builtin.indentlines.active = false
 
-lvim.colorscheme = "catppuccin"
-require("catppuccin").setup({ flavour = "mocha", })
+-- require("catppuccin").setup({ flavour = "mocha", })
+-- require("catppuccin").setup()
+lvim.colorscheme = "habamax"
 
-local dap_status_ok, dap = pcall(require, "dap")
-if not dap_status_ok then
-  return
-end
+-- local dap_status_ok, dap = pcall(require, "dap")
+-- if not dap_status_ok then
+--   return
+-- end
 
-dap.configurations.scala = {
-  {
-    type = "scala",
-    request = "launch",
-    name = "Run or Test Target",
-    metals = {
-      runType = "runOrTestFile",
-    },
-  },
-  {
-    type = "scala",
-    request = "launch",
-    name = "Test Target",
-    metals = {
-      runType = "testTarget",
-    },
-  },
-}
+-- dap.configurations.scala = {
+--   {
+--     type = "scala",
+--     request = "launch",
+--     name = "Run or Test Target",
+--     metals = {
+--       runType = "runOrTestFile",
+--     },
+--   },
+--   {
+--     type = "scala",
+--     request = "launch",
+--     name = "Test Target",
+--     metals = {
+--       runType = "testTarget",
+--     },
+--   },
+-- }

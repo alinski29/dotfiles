@@ -9,3 +9,14 @@ formatters.setup {
   { command = "shfmt",              filetypes = { "sh", "zsh" } },
   { command = "prettier",           filetypes = { "css" } },
 }
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { name = "flake8" },
+  {
+    name = "shellcheck",
+    args = { "--severity", "warning" },
+  },
+}
+
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
