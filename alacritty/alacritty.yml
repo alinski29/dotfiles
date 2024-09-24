@@ -99,13 +99,10 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    # family: Hack Nerd Font
     # family: monospace
-    # family: FuraCode Nerd Font
-    # family: FiraCode Nerd Font
-    # family: FiraCode Nerd Font Mono
-    family: JetBrains Mono Nerd Font
-    # family: RobotoMono Nerd Font
+    # family: JetBrains Mono Nerd Font
+    family: RobotoMono Nerd Font Mono
+    # family: Monaco Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -116,16 +113,10 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    # family: Hack
     # family: monospace
-    # faimily: JetBrainsMono Nerd Font Mono
-    # family: FuraCode Nerd Font
-    # family: FiraCode Nerd Font
-    # family: FiraCode Nerd Font Mono
-    family: JetBrains Mono Nerd Font
-    # family: FiraCode Nerd Font
-    # #family: SauceCodePro Nerd Font
-    # family: RobotoMono Nerd Font
+    # family: JetBrains Mono Nerd Font
+    family: RobotoMono Nerd Font Mono
+    # family: Monaco Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -136,15 +127,10 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    # family: Hack
-    # family: monospace
-    # family: FuraCode Nerd Font
-    # family: FiraCode Nerd Font
-    # family: FiraCode Nerd Font Mono
-    family: JetBrains Mono Nerd Font
-    # family: FiraCode Nerd Font
-    #family: SauceCodePro Nerd Font
-    # family: RobotoMono Nerd Font
+      # family: monospace
+    # family: JetBrains Mono Nerd Font
+    family: RobotoMono Nerd Font Mono
+    # family: Monaco Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -154,15 +140,11 @@ font:
     # Font family
     #
     # If the bold italic family is not specified, it will fall back to the
-    # value specified for the normal font.
-    # family: Hack
-    # family: FuraCode Nerd Font
-    # family: FiraCode Nerd Font
-    # family: FiraCode Nerd Font Mono
-    family: JetBrains Nerd Font Mono
-    # family: FiraCode Nerd Font
-    # family: SauceCodePro Nerd Font
-    # family: RobotoMono Nerd Font
+    # value specified for the normal font
+    # family: monospace
+    # family: JetBrains Mono Nerd Font
+    family: RobotoMono Nerd Font Mono
+    # family: Monaco Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
@@ -184,7 +166,7 @@ font:
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
-    x: 2
+    x: 0
     y: 1
 
   # Glyph offset determines the locations of the glyphs within their cells with
@@ -213,163 +195,49 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: true
 
-# Dracula
-# colors:
-#   # Default colors
-#   primary:
-#     background: '0x282a36'
-#     foreground: '0xf8f8f2'
-#  
-#   # Normal colors
-#   normal:
-#     black:   '0x000000'
-#     red:     '0xff5555'
-#     green:   '0x50fa7b'
-#     yellow:  '0xf1fa8c'
-#     blue:    '0xbd93f9'
-#     magenta: '0xff79c6'
-#     cyan:    '0x8be9fd'
-#     white:   '0xbbbbbb'
-#  
-#   # Bright colors
-#   bright:
-#     black:   '0x555555'
-#     red:     '0xff5555'
-#     green:   '0x50fa7b'
-#     yellow:  '0xf1fa8c'
-#     blue:    '0xcaa9fa'
-#     magenta: '0xff79c6'
-#     cyan:    '0x8be9fd'
-#     white:   '0xffffff'
-
-# Colors (One Dark)
-# colors:
-#   # Default colors
-#   primary:
-#     background: '0x1e2127'
-#     foreground: '0xabb2bf'
-#
-#   ## Normal colors
-#   normal:
-#     black:   '0x1e2127'
-#     red:     '0xe06c75'
-#     green:   '0x98c379'
-#     yellow:  '0xd19a66'
-#     blue:    '0x61afef'
-#     magenta: '0xc678dd'
-#     cyan:    '0x56b6c2'
-#     white:   '0xabb2bf'
-#
-#   ## Bright colors
-#   bright:
-#     black:   '0x5c6370'
-#     red:     '0xe06c75'
-#     green:   '0x98c379'
-#     yellow:  '0xd19a66'
-#     blue:    '0x61afef'
-#     magenta: '0xc678dd'
-#     cyan:    '0x56b6c2'
-#     white:   '0xffffff'
-
-# Colors (Doom One)
-#colors:
-  ## Default colors
+# Colors (Rose Pine)
+colors:
   primary:
-    background: '0x282c34'
-    foreground: '0xbbc2cf'
-
-  ## Normal colors
-  normal:
-    black:   '0x282c34'
-    red:     '0xff6c6b'
-    green:   '0x98be65'
-    yellow:  '0xecbe7b'
-    blue:    '0x51afef'
-    magenta: '0xc678dd'
-    cyan:    '0x46d9ff'
-    white:   '0xbbc2cf'
-
-#Colors (Afterglow)
-#colors:
-  ## Default colors
-  #primary:
-    #background: '0x2c2c2c'
-    #foreground: '0xd6d6d6'
-
-    #dim_foreground:    '0xdbdbdb'
-    #bright_foreground: '0xd9d9d9'
-    #dim_background:    '0x202020' # not sure
-    #bright_background: '0x3a3a3a' # not sure
-
-  ## Cursor colors
-  #cursor:
-    #text:   '0x2c2c2c'
-    #cursor: '0xd9d9d9'
-
-  ## Normal colors
-  #normal:
-    #black:   '0x1c1c1c'
-    #red:     '0xbc5653'
-    #green:   '0x909d63'
-    #yellow:  '0xebc17a'
-    #blue:    '0x7eaac7'
-    #magenta: '0xaa6292'
-    #cyan:    '0x86d3ce'
-    #white:   '0xcacaca'
-
-  ## Bright colors
-  #bright:
-    #black:   '0x636363'
-    #red:     '0xbc5653'
-    #green:   '0x909d63'
-    #yellow:  '0xebc17a'
-    #blue:    '0x7eaac7'
-    #magenta: '0xaa6292'
-    #cyan:    '0x86d3ce'
-    #white:   '0xf7f7f7'
-
-  ## Dim colors
-  #dim:
-    #black:   '0x232323'
-    #red:     '0x74423f'
-    #green:   '0x5e6547'
-    #yellow:  '0x8b7653'
-    #blue:    '0x556b79'
-    #magenta: '0x6e4962'
-    #cyan:    '0x5c8482'
-    #white:   '0x828282'
-
-# Colors (Nord)
-#colors:
-  ## Default colors
-  #primary:
-    #background: '0x2E3440'
-    #foreground: '0xD8DEE9'
-
-  ## Normal colors
-  #normal:
-    #black:   '0x3B4252'
-    #red:     '0xBF616A'
-    #green:   '0xA3BE8C'
-    #yellow:  '0xEBCB8B'
-    #blue:    '0x81A1C1'
-    #magenta: '0xB48EAD'
-    #cyan:    '0x88C0D0'
-    #white:   '0xE5E9F0'
-
-  ## Bright colors
-  #bright:
-    #black:   '0x4C566A'
-    #red:     '0xBF616A'
-    #green:   '0xA3BE8C'
-    #yellow:  '0xEBCB8B'
-    #blue:    '0x81A1C1'
-    #magenta: '0xB48EAD'
-    #cyan:    '0x8FBCBB'
-    #white:   '0xECEFF4'
-
+    background: "0x191724"
+    foreground: "0xe0def4"
+  cursor:
+    text: "0xe0def4"
+    cursor: "0x524f67"
+  vi_mode_cursor:
+    text: "0xe0def4"
+    cursor: "0x524f67"
+  line_indicator:
+    foreground: None
+    background: None
   selection:
+    text: "0xe0def4"
+    background: "0x403d52"
     save_to_clipboard: true
+  normal:
+    black: "0x26233a"
+    red: "0xeb6f92"
+    green: "0x31748f"
+    yellow: "0xf6c177"
+    blue: "0x9ccfd8"
+    magenta: "0xc4a7e7"
+    cyan: "0xebbcba"
+    white: "0xe0def4"
+  bright:
+    black: "0x6e6a86"
+    red: "0xeb6f92"
+    green: "0x31748f"
+    yellow: "0xf6c177"
+    blue: "0x9ccfd8"
+    magenta: "0xc4a7e7"
+    cyan: "0xebbcba"
+    white: "0xe0def4"
+  hints:
+    start:
+      foreground: "#908caa"
+      background: "#1f1d2e"
+    end:
+      foreground: "#6e6a86"
+      background: "#1f1d2e"
 
   # Indexed Colors
   #
@@ -412,7 +280,7 @@ font:
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
 # background_opacity: 0.99
-window.opacity: 0.999
+# window.opacity: 0.999
 # background_opacity: 0.80
 
 #selection:
