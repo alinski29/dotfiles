@@ -2,7 +2,7 @@ lvim.plugins = {
 	{
 		"catppuccin/nvim",
 		name = "catappucin",
-    priority = 1000,
+		priority = 1000,
 		confing = function()
 			require("catppuccin").setup({ flavour = "mocha" })
 		end,
@@ -13,6 +13,8 @@ lvim.plugins = {
 	"AckslD/swenv.nvim",
 	"stevearc/dressing.nvim",
 	"nvim-tree/nvim-web-devicons",
+	"nvim-treesitter/nvim-treesitter",
+	"kdheepak/JuliaFormatter.vim",
 	{
 		"scalameta/nvim-metals",
 		config = function()
