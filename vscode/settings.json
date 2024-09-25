@@ -1,150 +1,109 @@
 {
-    "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "python.languageServer": "Pylance",
-    "kite.showWelcomeNotificationOnStartup": false,
+    "files.watcherExclude": {
+        "**/.bloop": true,
+        "**/.metals": true,
+        "**/.ammonite": true
+    },
+    "workbench.colorTheme": "Tokyo Night Storm",
+    "editor.fontFamily": "DankMono Nerd Font, CommitMono Nerd Font, RobotoMono Nerd Font Mono, Monaco Nerd Font Mono, JetBrains Mono Nerd Font",
+    "editor.tabSize": 2,
+    "files.exclude": {
+        "**/.bloop": true,
+        "**/.idea": true,
+        "**/.metals": true
+    },
+    "metals.javaHome": "/usr/lib/jvm/java-11-openjdk",
+    "[python]": {
+        "editor.formatOnType": true
+    },
     "terminal.integrated.commandsToSkipShell": [
         "language-julia.interrupt"
     ],
-    "yaml.schemas": {
-        "file:///toc.schema.json": "/toc\\.yml/i"
-    },
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook"
-    },
-    "go.toolsManagement.autoUpdate": true,
-    "git.suggestSmartCommit": false,
-    "notebook.cellToolbarLocation": {
-        "default": "right",
-        "jupyter-notebook": "left"
-    },
-    "julia.execution.codeInREPL": true,
-    "julia.execution.resultType": "inline",
     "julia.symbolCacheDownload": true,
-    "workbench.colorTheme": "One Dark Pro Mix",
-    "editor.fontSize": 13,
-    "editor.tabSize": 2,
-    "editor.guides.indentation": false,
-    "editor.fontFamily": "'FiraCode Nerd Font', 'JetBrains Mono Nerd Font', 'Cascadia Code',  'RobotoMono Nerd Font'",
     "julia.enableTelemetry": false,
-    "julia.format.indent": 2,
-    "editor.lineNumbers": "relative",
-    "editor.minimap.enabled": false,
-    "files.exclude": {
-        "**/.idea": true
-    },
-    "notebook.lineNumbers": "on",
-    "zenMode.hideLineNumbers": false,
-    "search.showLineNumbers": true,
-    "vim.neovimPath": "/usr/bin/nvim",
-    "vim.useSystemClipboard": true,
-    "vim.handleKeys": {
-        //"<A-l>": true,
-        "<C-a>": true,
-        "<C-g>": false
-    },
-    "vim.insertModeKeyBindings": [
-        {
-            "before": ["j", "k"],
-            "after": ["<Esc>"]
-        },
-        {
-            "before": ["k", "j"],
-            "after": ["<Esc>"]
-        },
-        {
-            "before": ["j", "j"],
-            "after": ["<Esc>"]
-        },
-        {
-            "before": ["k", "k"],
-            "after": ["<Esc>"]
-        }
+    "julia.debuggerDefaultCompiled": [
+        
+        "Base.",
+        "-Base.!",
+        "-Base.all",
+        "-Base.all!",
+        "-Base.any",
+        "-Base.any!",
+        "-Base.cd",
+        "-Base.iterate",
+        "-Base.collect",
+        "-Base.collect_similar",
+        "-Base._collect",
+        "-Base.collect_to!",
+        "-Base.collect_to_with_first!",
+        "-Base.filter",
+        "-Base.filter!",
+        "-Base.foreach",
+        "-Base.findall",
+        "-Base.findfirst",
+        "-Base.findlast",
+        "-Base.findnext",
+        "-Base.findprev",
+        "-Base.Generator",
+        "-Base.map",
+        "-Base.map!",
+        "-Base.maximum!",
+        "-Base.minimum!",
+        "-Base.mktemp",
+        "-Base.mktempdir",
+        "-Base.open",
+        "-Base.prod!",
+        "-Base.redirect_stderr",
+        "-Base.redirect_stdin",
+        "-Base.redirect_stdout",
+        "-Base.reenable_sigint",
+        "-Base.setindex!",
+        "-Base.setprecision",
+        "-Base.setrounding",
+        "-Base.show",
+        "-Base.sprint",
+        "-Base.sum",
+        "-Base.sum!",
+        "-Base.task_local_storage",
+        "-Base.timedwait",
+        "-Base.withenv",
+        "-Base.Broadcast",
+        "Core",
+        "Core.Compiler.",
+        "Core.IR",
+        "Core.Intrinsics",
+        "DelimitedFiles",
+        "Distributed",
+        "LinearAlgebra.",
+        "Serialization",
+        "Statistics",
+        "-Statistics.mean",
+        "SparseArrays",
+        "Mmap"
     ],
-    "vim.normalModeKeyBindings": [
-        {
-            "before": ["<leader>", "h"],
-            "commands": [
-                ":nohls"
-            ],
-            "siltent": true
-        }
-    ],
-    "vim.visualModeKeyBindingsNonRecursive": [
-        {
-            "before": [
-                ">"
-            ],
-            "commands": [
-                "editor.action.indentLines"
-            ]
-        },
-        {
-            "before": [
-                "<"
-            ],
-            "commands": [
-                "editor.action.outdentLines"
-            ]
-        }
-    ],
-    "vim.statusBarColorControl": true,
-    "vim.statusBarColors.normal": [
-        "#8FBCBB",
-        "#000"
-    ],
-    "vim.statusBarColors.insert": [
-        "#BF616A",
-        "#000"
-    ],
-    "vim.statusBarColors.visual": [
-        "#B48EAD",
-        "#000"
-    ],
-    "vim.statusBarColors.visualline": [
-        "#B48EAD",
-        "#000"
-    ],
-    "vim.statusBarColors.visualblock": [
-        "#A3BE8C",
-        "#000"
-    ],
-    "vim.statusBarColors.replace": "#D08770",
-    "vim.statusBarColors.commandlineinprogress": "#007ACC",
-    "vim.statusBarColors.searchinprogressmode": "#007ACC",
-    "vim.statusBarColors.easymotionmode": "#007ACC",
-    "vim.statusBarColors.easymotioninputmode": "#007ACC",
-    "vim.statusBarColors.surroundinputmode": "#007ACC",
-    "workbench.colorCustomizations": {
-        "statusBar.background": "#8FBCBB",
-        "statusBar.noFolderBackground": "#8FBCBB",
-        "statusBar.debuggingBackground": "#8FBCBB",
-        "statusBar.foreground": "#000",
-        "statusBar.debuggingForeground": "#000"
-    },
+    "julia-format.tabs": 0,
     "[julia]": {
-        "editor.defaultFormatter": "singularitti.vscode-julia-formatter"
+        "editor.defaultFormatter": "0h7z.vscode-julia-format"
     },
-    "editor.cursorSmoothCaretAnimation": true,
-    "editor.cursorBlinking": "smooth",
-    "workbench.iconTheme": "material-icon-theme",
-    "julia.enableCrashReporter": false,
-    "extensions.ignoreRecommendations": true,
-    "vim.neovimUseConfigFile": true,
-    "vim.neovimConfigPath": "~/config/nvim/init.lua",
-    "juliaFormatter.alwaysForIn": true,
-    "juliaFormatter.indent": 2,
-    "juliaFormatter.removeExtraNewlines": true,
-    "juliaFormatter.whitespaceOpsInIndices": true,
-    "juliaFormatter.whitespaceTypedefs": true,
-    "vim.enableNeovim": true,
-    "vim.foldfix": true,
-    "vim.leader": "\\<space>",
-    "juliaFormatter.alignStructField": true,
-    "juliaFormatter.style": "blue",
-    "markdown.extension.tableFormatter.normalizeIndentation": true,
-    "juliaFormatter.alwaysUseReturn": true,
-    "juliaFormatter.formatDocstrings": true,
-    "juliaFormatter.importToUsing": true,
-    "markdown.extension.toc.updateOnSave": false
+    "julia.lint.missingrefs": "all",
+    "sqltools.useNodeRuntime": true,
+    "editor.minimap.enabled": false,
+    "terminal.integrated.fontFamily": "monospace",
+    "python.analysis.autoFormatStrings": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+        "-s",
+        "-v"
+    ],
+    "security.workspace.trust.untrustedFiles": "open",
+    "julia-format.flag": "style=DefaultStyle(), indent=2,margin=110, always_for_in=true, remove_extra_newlines=true, whitespace_typedefs=true, whitespace_ops_in_indices=true, whitespace_in_kwargs=false, separate_kwargs_with_semicolon=true, pipe_to_function_call=false, always_use_return=false, annotate_untyped_fields_with_any=true, trailing_comma=true, surround_whereop_typeparameters=true, align_assignment=true, align_pair_arrow=true",
+    "julia-format.inop": "= in",
+    "editor.lineNumbers": "relative",
+    "workbench.sideBar.location": "right",
+    "java.configuration.runtimes": [
+        "/usr/lib/jvm/default"
+    ]
 }
