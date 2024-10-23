@@ -3,6 +3,9 @@
 .stversions/
 .stfolder/
 *.netrwhist
-nvim-vimscript/
 zsh/secrets.env
 nvim/plugin/packer_compiled.lua
+lvim/usr/bin/
+lvim/usr/include
+lvim/usr/lib
+lvim/usr/share
