@@ -154,7 +154,7 @@ key = "End"
 mode = "~Alt"
 mods = "Shift"
 
-[shell]
+[terminal.shell]
 program = "/usr/bin/zsh"
 
 [window]
