@@ -2,10 +2,105 @@
 .idea/
 .stversions/
 .stfolder/
+.zed/
+.issues
+
 *.netrwhist
-zsh/secrets.env
+nvim.log
+# The per-machine manifest: logins, architectures and module lists. Never commit
+# it, and never use a real hostname as a key in it.
+nix/roles.nix
+# Build outputs of the flake at nix/, which is invoked as a path: reference and
+# therefore copied wholesale into the store.
+nix/result
+nix/result-*
 nvim/plugin/packer_compiled.lua
-lvim/usr/bin/
-lvim/usr/include
-lvim/usr/lib
-lvim/usr/share
+archived/
+.pi/
+.pi-subagents
+
+# Folded in from the nested .gitignore files (pi/.gitignore, neovim/.gitignore,
+# pi/agent/npm/.gitignore), which are gone. Reason: nono's rollback snapshots
+# read only the repo-root .gitignore, so anything ignored solely by a nested file
+# was still being snapshotted - 41 MB of pi runtime state per session. Paths are
+# qualified from the repo root, and directory entries keep their trailing slash,
+# which is the form the rollback matcher honours.
+
+# pi/: secrets, pi binary dir, managed install
+pi/agent/auth.json
+pi/**/bin/
+pi/agent/install/
+
+# pi/: runtime data
+pi/agent/sessions/
+pi/agent/cache/
+pi/agent/intercom/
+pi/agent/run-history.jsonl
+pi/agent/.agent-browser/
+pi/agent/pi-hermes-memory/
+pi/agent/projects-memory/
+pi/agent/models-store.json
+pi/agent/trust.json
+pi/agent/pi-subagents/
+pi/agent/fff/
+pi/agent/missions/
+pi/agent/pi-speeed-stats.json
+pi/agent/usage-extension-cache.json
+pi/agent/pi-debug.log
+pi/agent/crashes.json
+
+# pi/: blackhole
+!pi/agent/pi-blackhole/pi-blackhole-config.json
+pi/agent/pi-blackhole/*
+
+# pi/: npm dependencies
+pi/agent/npm/node_modules/
+pi/agent/npm/package-lock.json
+
+# pi/: context mode stats
+pi/context-mode/
+
+# pi/: dumped sessions
+pi/pi-session-*.html
+pi/pi-session-*.json
+
+# pi/: ACP session map
+pi/pi-acp/
+
+# pi/: other stuff
+pi/web-search-cache/
+pi/exa-usage.json
+pi/agent/tmp/
+
+# pi/: LMDB stores (fff frecency/history, and any future one). Filename glob
+# rather than a path prefix: nono's rollback matcher resolves paths against
+# each tracked root, so a repo-qualified path can slip past it.
+*.mdb
+
+# pi/: nix
+pi/nix/result
+pi/nix/result-*
+
+# pi/agent/npm/: was its own .gitignore - ignore everything but the manifest
+pi/agent/npm/*
+!pi/agent/npm/.gitignore
+!pi/agent/npm/package.json
+
+# neovim/
+neovim/**/tt.*
+neovim/**/.tests/
+neovim/doc/tags
+neovim/**/debug/
+neovim/**/.repro/
+neovim/**/foo.*
+neovim/**/*.log
+neovim/**/data/
+
+# nono/: the pi profile rendered for this machine by
+# scripts/nono-profile-render.sh. nono expands variables in a profile's
+# `filesystem.*` paths but not in `rollback.exclude_patterns`, so those are
+# resolved to absolute paths here. The result names one machine's home and
+# checkout, which is why the source profile keeps its variables and this file is
+# never committed.
+nono/profiles/pi.generated.json
+nono/profiles/pi.generated.json.tmp

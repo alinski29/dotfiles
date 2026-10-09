@@ -1,0 +1,55 @@
+# Per-machine manifest for the home-manager configuration.
+#
+# NOT in git, and copied by hand on a new machine. From the repo root:
+#
+#   cp nix/roles.nix.example nix/roles.nix
+#
+# This file is the only place a login name, an architecture or a module list is
+# written, because the repository is public. So nothing here may identify a
+# machine: the keys below are *roles* - generic words you choose - not hostnames,
+# and a real hostname is never used as a key anywhere in this configuration.
+#
+#   key      a role: desktop, vps, laptop, ...   you invent it
+#   user     the login name on that machine      from the OS
+#   system   the architecture                    x86_64-linux, aarch64-linux
+#   modules  the capabilities that role gets     paths relative to nix/
+#
+# Two machines that should be configured alike share one role. Two logins on the
+# same kind of machine need two roles.
+{
+  # A machine with a display.
+  #
+  # On the workstation this repo is also the Syncthing folder, so the live
+  # checkout is an ordinary directory reached through the ~/.dotfiles symlink.
+  # That is why every path in the configuration resolves through that symlink and
+  # no absolute checkout path is ever written down.
+  desktop = {
+    # The real login name. The placeholder fails the build on purpose, so a
+    # forgotten edit cannot silently produce a configuration for /home/CHANGEME.
+    user = "CHANGEME";
+    system = "x86_64-linux";
+    modules = [
+      ./modules/coding-agent.nix
+      ./modules/desktop.nix
+    ];
+  };
+
+  # A headless box.
+  #
+  #   - No desktop module, deliberately: GUI packages stay distro-installed and
+  #     there is no display here anyway. See modules/desktop.nix for the Ghostty
+  #     lesson behind that rule.
+  #   - The login shell is not managed here either. zsh is installed with the
+  #     distro package manager and set with `chsh -s /usr/bin/zsh`: a Nix store
+  #     shell as the login shell can lock you out of SSH, and recovery would be
+  #     `ssh -t <host> bash`.
+  #   - The agent module stays, because spawning agents on a remote box is how
+  #     this setup relieves memory pressure on the workstation.
+  vps = {
+    user = "CHANGEME";
+    system = "x86_64-linux";
+    modules = [
+      ./modules/coding-agent.nix
+    ];
+  };
+}

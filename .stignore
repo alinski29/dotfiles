@@ -1,0 +1,139 @@
+// .stignore - Syncthing ignore patterns for this folder (dotfiles).
+//
+// Mirrors every .gitignore in this tree (root + nested), flattened to
+// root-relative patterns: a synced folder has exactly ONE .stignore, at its
+// root, and #include cannot scope patterns to a subdirectory.
+//
+// Rules that matter here:
+//   - All patterns are relative to the folder root.
+//   - The FIRST matching pattern wins, so `!` negations are written BEFORE the
+//     patterns they override.
+//   - A pattern without `/` (or with a leading `**/`) matches at any depth; a
+//     pattern with `/` is anchored like git's "has a separator" rule.
+//   - `.stignore` itself is never synced to other devices.
+//
+// Deliberately NOT mirrored - dead patterns, their trees are already ignored
+// wholesale (see `archived` and `pi/agent/tmp` below):
+//   archived/nvim/nvim-packer-git/src/packer.nvim/.gitignore
+//   pi/agent/tmp/extensions/npm/f35b2129/.gitignore
+
+// ---------------------------------------------------------------------------
+// Syncthing / OS runtime junk. `(?d)` marks them deletable so they never block
+// removal of an otherwise empty directory.
+// ---------------------------------------------------------------------------
+(?d).stfolder
+(?d).stversions
+(?d)~syncthing~*.tmp
+(?d).DS_Store
+
+// ---------------------------------------------------------------------------
+// EXCEPTION vs .gitignore - nix/roles.nix  (see ask: exception lives HERE)
+// .gitignore ignores it ("local manifest, never commit"); Syncthing must not.
+// The negation is kept explicit, with no matching ignore above it, so the
+// intent survives future edits. Caveat: this file calls itself per-machine, so
+// if two devices both edit it, Syncthing will emit a .sync-conflict-* copy
+// instead of merging.
+// ---------------------------------------------------------------------------
+!nix/roles.nix
+
+// ---------------------------------------------------------------------------
+// root .gitignore   (.stfolder/ and .stversions/ already covered above)
+// ---------------------------------------------------------------------------
+.git
+.idea
+.vscode
+.zed
+*.netrwhist
+archived
+.pi
+.pi-subagents
+nix/result
+nix/result-*
+nvim/plugin/packer_compiled.lua
+
+// ---------------------------------------------------------------------------
+// pi/.gitignore
+//
+// Bare-name patterns in pi/.gitignore match at ANY depth below pi/, so each is
+// emitted twice: `pi/x` for the direct child and `pi/**/x` for deeper hits.
+// ---------------------------------------------------------------------------
+pi/agent/install
+pi/agent/sessions
+pi/agent/cache
+pi/agent/intercom
+pi/agent/run-history.jsonl
+pi/agent/.agent-browser
+pi/agent/pi-hermes-memory
+pi/agent/projects-memory
+pi/agent/models-store.json
+pi/agent/trust.json
+pi/agent/pi-subagents
+pi/agent/fff
+pi/agent/missions
+pi/agent/pi-speeed-stats.json
+pi/agent/usage-extension-cache.json
+pi/agent/tmp
+
+// pi-blackhole: negation must precede the wipe of the directory
+!/pi/agent/pi-blackhole/pi-blackhole-config.json
+pi/agent/pi-blackhole/*
+
+pi/agent/npm/node_modules
+pi/agent/npm/package-lock.json
+
+pi/bin
+pi/**/bin
+pi/context-mode
+pi/**/context-mode
+pi/pi-acp
+pi/**/pi-acp
+pi/web-search-cache
+pi/**/web-search-cache
+pi/exa-usage.json
+pi/**/exa-usage.json
+pi/pi-session-*.html
+pi/**/pi-session-*.html
+pi/pi-session-*.json
+pi/**/pi-session-*.json
+
+// pi/.gitignore also lists `nix/result` and `nix/result-*`; pi/nix/ no longer
+// exists (the flake moved to nix/), so those are dead. Root nix/result* is
+// covered above.
+
+// ---------------------------------------------------------------------------
+// neovim/.gitignore   (same bare-name doubling rule as pi/ above)
+// ---------------------------------------------------------------------------
+neovim/tt.*
+neovim/**/tt.*
+neovim/foo.*
+neovim/**/foo.*
+neovim/*.log
+neovim/**/*.log
+neovim/.tests
+neovim/**/.tests
+neovim/.repro
+neovim/**/.repro
+neovim/data
+neovim/**/data
+neovim/debug
+neovim/**/debug
+neovim/doc/tags
+neovim/lazy-lock.json
+
+// ---------------------------------------------------------------------------
+// pi/agent/npm/.gitignore   (`*`, `!.gitignore`, `!package.json`)
+// Negations first: only these two entries of that directory are synced.
+// ---------------------------------------------------------------------------
+!/pi/agent/npm/.gitignore
+!/pi/agent/npm/package.json
+/pi/agent/npm/*
+
+// ---------------------------------------------------------------------------
+// nono/profiles/pi.generated.json
+// Rendered per machine by scripts/nono-profile-render.sh: the rollback
+// exclusions nono will not expand itself, resolved to this machine's absolute
+// paths. Syncing it would replace another machine's render with paths that do
+// not exist there, and the next rebuild would only fix it back.
+// ---------------------------------------------------------------------------
+nono/profiles/pi.generated.json
+nono/profiles/pi.generated.json.tmp

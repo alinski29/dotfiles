@@ -1,0 +1,49 @@
+# Ghostty configuration.
+
+theme = Nightfox
+
+# --- Terminal identity ------------------------------------------------------
+term = xterm-ghostty
+
+# --- Font -------------------------------------------------------------------
+font-family = CommitMono Nerd Font
+font-size = 12
+
+font-style-bold = Bold
+font-style-italic = Italic
+font-style-bold-italic = Bold Italic
+adjust-font-baseline = -1
+
+# --- Window -----------------------------------------------------------------
+background-opacity = 0.99
+background-blur = true
+maximize = true
+
+window-decoration = auto
+window-padding-x = 1
+window-padding-y = 1
+
+shell-integration-features = no-title,ssh-env
+
+# --- Keybinds ---------------------------------------------------------------
+# ctrl+shift+l replaces alacritty's ClearLogNotice plus the \f character pair.
+# shift+home/end replace alacritty's ScrollToTop/ScrollToBottom.
+keybind = shift+home=scroll_to_top
+keybind = shift+end=scroll_to_bottom
+keybind = ctrl+shift+l=clear_screen
+
+# Window splitting is handled by herdr, so ghostty's split bindings are
+# unbound to keep the terminal from claiming those keys.
+keybind = ctrl+shift+o=unbind
+keybind = ctrl+shift+e=unbind
+keybind = ctrl+shift+enter=unbind
+keybind = super+ctrl+[=unbind
+keybind = super+ctrl+]=unbind
+keybind = ctrl+alt+arrow_up=unbind
+keybind = ctrl+alt+arrow_down=unbind
+keybind = ctrl+alt+arrow_left=unbind
+keybind = ctrl+alt+arrow_right=unbind
+keybind = super+ctrl+shift+arrow_up=unbind
+keybind = super+ctrl+shift+arrow_down=unbind
+keybind = super+ctrl+shift+arrow_left=unbind
+keybind = super+ctrl+shift+arrow_right=unbind

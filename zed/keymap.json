@@ -1,0 +1,445 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "alt-f4": "workspace::CloseWindow",
+      "ctrl-j": "workspace::ToggleBottomDock",
+      "ctrl-k ctrl-s": "zed::OpenKeymap",
+      "ctrl-k ctrl-t": "theme_selector::Toggle",
+      "ctrl-n": "workspace::NewFile",
+      "ctrl-pagedown": "tab_switcher::Toggle",
+      "ctrl-shift-`": "workspace::NewTerminal",
+      "ctrl-shift-d": "debug_panel::ToggleFocus",
+      // "ctrl-shift-e": "project_panel::ToggleFocus",
+      // "ctrl-shift-f": "project_search::SearchInNew",
+      // "ctrl-shift-h": [
+      //   "pane::DeploySearch",
+      //   {
+      //     "replace_enabled": true,
+      //   },
+      // ],
+      "ctrl-shift-j": "tab_switcher::Toggle",
+      "ctrl-shift-k": "zed::OpenKeymap",
+      "ctrl-shift-l": "tab_switcher::Toggle",
+      "ctrl-shift-m": "diagnostics::Deploy",
+      "ctrl-shift-n": "workspace::NewWindow",
+      "ctrl-shift-s": "workspace::SaveAs",
+      "ctrl-shift-t": "workspace::NewTerminal",
+      "ctrl-shift-tab": [
+        "tab_switcher::Toggle",
+        {
+          "select_last": true,
+        },
+      ],
+      "ctrl-shift-w": "workspace::CloseWindow",
+      "ctrl-shift-x": "zed::Extensions",
+      "ctrl-tab": "tab_switcher::Toggle",
+      "f10": "debugger::StepOver",
+      "f11": "debugger::StepInto",
+      "f5": "debugger::Continue",
+      "shift-f11": "debugger::StepOut",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-down": "editor::MoveLineDown",
+      "alt-f3": "editor::GoToNextChange",
+      "alt-f8": [
+        "editor::GoToDiagnostic",
+        {
+          "severity": {
+            "max": "error",
+            "min": "hint",
+          },
+        },
+      ],
+      "alt-up": "editor::MoveLineUp",
+      "alt-z": "editor::ToggleSoftWrap",
+      "ctrl-/": "editor::ToggleComments",
+      "ctrl-a": "editor::SelectAll",
+      "ctrl-backspace": "editor::DeleteToPreviousWordStart",
+      "ctrl-c": "editor::Copy",
+      "ctrl-d": "editor::SelectNext",
+      "ctrl-delete": "editor::DeleteToNextWordEnd",
+      "ctrl-end": "editor::MoveToEnd",
+      "ctrl-enter": "editor::NewlineBelow",
+      "ctrl-f": "buffer_search::Deploy",
+      "ctrl-f12": "editor::GoToImplementation",
+      "ctrl-g": "go_to_line::Toggle",
+      "ctrl-h": "buffer_search::DeployReplace",
+      "ctrl-home": "editor::MoveToBeginning",
+      "ctrl-i": "editor::ShowCompletions",
+      "ctrl-k": "editor::ShowSignatureHelp",
+      "ctrl-k ctrl-0": "editor::FoldAll",
+      "ctrl-k ctrl-[": "editor::FoldRecursive",
+      "ctrl-k ctrl-\\": "pane::SplitUp",
+      "ctrl-k ctrl-]": "editor::UnfoldRecursive",
+      "ctrl-k ctrl-f": "editor::FormatSelections",
+      "ctrl-k ctrl-i": "editor::Hover",
+      "ctrl-k ctrl-j": "editor::UnfoldAll",
+      "ctrl-k ctrl-l": "editor::ToggleFold",
+      "ctrl-k ctrl-r": "git::Restore",
+      "ctrl-left": "editor::MoveToPreviousWordStart",
+      "ctrl-shift-5": "pane::SplitRight",
+      "ctrl-shift-[": "editor::Fold",
+      "ctrl-shift-\\": "editor::MoveToEnclosingBracket",
+      "ctrl-shift-]": "editor::UnfoldLines",
+      "ctrl-shift-alt-down": "editor::DuplicateLineDown",
+      "ctrl-shift-alt-up": "editor::DuplicateLineUp",
+      "ctrl-shift-down": "editor::AddSelectionBelow",
+      "ctrl-shift-end": "editor::SelectToEnd",
+      "ctrl-shift-home": "editor::SelectToBeginning",
+      "ctrl-shift-k": "editor::DeleteLine",
+      "ctrl-shift-l": "editor::SelectAllMatches",
+      "ctrl-shift-left": "editor::SelectToPreviousWordStart",
+      "ctrl-.": "outline::Toggle",
+      "ctrl-shift-space": "editor::ShowSignatureHelp",
+      "ctrl-shift-up": "editor::AddSelectionAbove",
+      "ctrl-shift-z": "editor::Redo",
+      "ctrl-space": "editor::ShowCompletions",
+      "ctrl-u": "editor::UndoSelection",
+      "ctrl-v": "editor::Paste",
+      "ctrl-w": "pane::CloseActiveItem",
+      "ctrl-x": "editor::Cut",
+      "ctrl-y": "editor::Redo",
+      "ctrl-z": "editor::Undo",
+      "f12": "editor::GoToDefinition",
+      "f2": "editor::Rename",
+      "f3": "search::SelectNextMatch",
+      "f9": "editor::ToggleBreakpoint",
+      "g t": "editor::GoToTypeDefinition",
+      "pagedown": "editor::PageDown",
+      "pageup": "editor::PageUp",
+      "shift-alt-down": "editor::AddSelectionBelow",
+      "shift-alt-f12": "editor::FindAllReferences",
+      "shift-alt-f3": "editor::GoToPreviousChange",
+      "shift-alt-f8": [
+        "editor::GoToPreviousDiagnostic",
+        {
+          "severity": {
+            "max": "error",
+            "min": "hint",
+          },
+        },
+      ],
+      "shift-alt-i": "editor::SplitSelectionIntoLines",
+      "shift-alt-left": "editor::SelectSmallerSyntaxNode",
+      "shift-alt-o": "editor::OrganizeImports",
+      "shift-alt-right": "editor::SelectLargerSyntaxNode",
+      "shift-alt-up": "editor::AddSelectionAbove",
+      "shift-f3": "search::SelectPreviousMatch",
+      "shift-insert": "editor::Paste",
+      "shift-pagedown": "editor::SelectPageDown",
+      "shift-pageup": "editor::SelectPageUp",
+      "space ,": "editor::Rename",
+    },
+  },
+  {
+    "context": "Editor && !agent_diff",
+    "bindings": {
+      "ctrl-k ctrl-alt-s": "git::StageAndNext",
+      "ctrl-k ctrl-n": "git::UnstageAndNext",
+    },
+  },
+  {
+    "context": "Editor && mode == full",
+    "bindings": {
+      "alt-f5": "editor::GoToNextChange",
+      "shift-alt-f5": "editor::GoToPreviousChange",
+    },
+  },
+  {
+    "context": "Editor && mode == full && edit_prediction",
+    "bindings": {
+      "alt-[": "editor::PreviousEditPrediction",
+      "alt-]": "editor::NextEditPrediction",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "alt-l": "vim::EndOfLine",
+      "alt-h": "vim::FirstNonWhitespace",
+    },
+  },
+  {
+    "context": "Editor && VimControl && vim_mode != insert",
+    "bindings": {
+      "<": ["workspace::SendKeystrokes", "< g v"],
+      ">": ["workspace::SendKeystrokes", "> g v"],
+    },
+  },
+  {
+    "context": "Markdown",
+    "bindings": {
+      "ctrl-c": "markdown::Copy",
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "ctrl-c": "project_panel::Copy",
+      "ctrl-v": "project_panel::Paste",
+      "ctrl-x": "project_panel::Cut",
+      "shift-insert": "project_panel::Paste",
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-k ctrl-\\": "pane::SplitUp",
+      "ctrl-shift-5": "pane::SplitRight",
+      "ctrl-v": "terminal::Paste",
+      "shift-insert": "terminal::Paste",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-alt--": "pane::GoBack",
+      "ctrl-alt-c": "workspace::CopyPath",
+      "ctrl-f5": "debugger::Start",
+      "ctrl-k ctrl-alt-c": "workspace::CopyPath",
+      "ctrl-o": "editor::OpenSelectedFilename",
+      "ctrl-shift--": "pane::GoForward",
+      "ctrl-shift-f5": "debugger::RerunSession",
+      "ctrl-shift-p": "command_palette::Toggle",
+      "f1": "command_palette::Toggle",
+      "f11": "zed::ToggleFullScreen",
+      "shift-f5": "debugger::Stop",
+    },
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "ctrl-o": "file_finder::Toggle",
+    },
+  },
+  {
+    "context": "(VimControl && !menu) || (!Editor && !Terminal)",
+    "bindings": {
+      "shift-h": "vim::GoToPreviousTab",
+    },
+  },
+  {
+    "context": "(VimControl && !menu) || (!Editor && !Terminal)",
+    "unbind": {
+      "g shift-t": "vim::GoToPreviousTab",
+    },
+  },
+  {
+    "context": "(VimControl && !menu) || (!Editor && !Terminal)",
+    "bindings": {
+      "shift-l": "vim::GoToTab",
+    },
+  },
+  {
+    "context": "(VimControl && !menu) || (!Editor && !Terminal)",
+    "unbind": {
+      "g t": "vim::GoToTab",
+    },
+  },
+  {
+    "context": "FileFinder || FileFinder > Picker > Editor || FileFinder > Picker > menu",
+    "unbind": {
+      "ctrl-shift-p": "file_finder::SelectPrevious",
+    },
+  },
+  {
+    "context": "FileFinder || FileFinder > Picker > Editor",
+    "bindings": {
+      "ctrl-o": "file_finder::Toggle",
+    },
+  },
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "ctrl-`": "terminal_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-`": "terminal_panel::Toggle",
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-`": "terminal_panel::Toggle",
+    },
+  },
+  {
+    "context": "Editor && VimControl && vim_mode == normal",
+    "bindings": {
+      "space f": "editor::Format",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-e": "file_finder::Toggle",
+    },
+  },
+  {
+    "context": "FileFinder || FileFinder > Picker > Editor",
+    "unbind": {
+      "ctrl-p": "file_finder::Toggle",
+    },
+  },
+  {
+    "context": "KeymapEditor",
+    "unbind": {
+      "ctrl-e": "zed::OpenKeymapFile",
+    },
+  },
+  {
+    "context": "Terminal",
+    "unbind": {
+      "ctrl-e": ["terminal::SendKeystroke", "ctrl-e"],
+    },
+  },
+  {
+    "context": "vim_mode == literal",
+    "unbind": {
+      "ctrl-e": ["vim::Literal", ["ctrl-e", "\u0005"]],
+    },
+  },
+  {
+    "context": "showing_completions",
+    "unbind": {
+      "ctrl-e": "vim::LineDown",
+    },
+  },
+  {
+    "context": "VimControl && !menu",
+    "unbind": {
+      "ctrl-e": "vim::LineDown",
+    },
+  },
+  {
+    "context": "MarkdownPreview",
+    "unbind": {
+      "ctrl-e": "markdown::ScrollDown",
+    },
+  },
+  {
+    "context": "menu || (VimControl && vim_mode == normal)",
+    "bindings": {
+      "ctrl-e": "workspace::ToggleRightDock",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-shift-i": "agent::Toggle",
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "ctrl-.": "editor::ToggleCodeActions",
+    },
+  },
+  {
+    "context": "Workspace && !Terminal",
+    "bindings": {
+      "ctrl-r": "projects::OpenRecent",
+    },
+  },
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "g r": "editor::FindAllReferences",
+    },
+  },
+  {
+    "context": "VimControl && !menu",
+    "unbind": {
+      "g r r": "editor::FindAllReferences",
+    },
+  },
+  {
+    "context": "(vim_mode == helix_normal || vim_mode == helix_select) && !menu",
+    "unbind": {
+      "g r": "editor::FindAllReferences",
+    },
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-b": "workspace::ToggleLeftDock",
+    },
+  },
+  {
+    "context": "VimControl && !menu",
+    "unbind": {
+      "ctrl-b": "vim::PageUp",
+    },
+  },
+  {
+    "context": "vim_mode == literal",
+    "unbind": {
+      "ctrl-b": ["vim::Literal", ["ctrl-b", "\u0002"]],
+    },
+  },
+  {
+    "context": "VimControl && vim_mode == normal && !menu",
+    "bindings": {
+      "ctrl-b": "pane::GoBack",
+    },
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-alt--": "pane::GoBack",
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-shift-o": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-t": "project_symbols::Toggle"
+    }
+  },
+  {
+    "context": "Workspace && !Terminal",
+    "bindings": {
+      "ctrl-s": "workspace::Save"
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-s": "workspace::Save"
+    }
+  },
+  {
+    "context": "Editor && VimControl && vim_mode != insert",
+    "bindings": {
+      "ctrl-y": "editor::CopyFileLocation"
+    }
+  },
+  {
+    "context": "Workspace && !Terminal",
+    "bindings": {
+      "ctrl-shift-g": "git_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "(vim_mode == helix_normal || vim_mode == helix_select || vim_mode == normal ) && !menu",
+    "bindings": {
+      "g i": "editor::GoToImplementation"
+    }
+  },
+  {
+    "context": "VimControl && !menu && vim_mode == normal",
+    "bindings": {
+      "g d": "editor::GoToDefinition"
+    }
+  }
+]

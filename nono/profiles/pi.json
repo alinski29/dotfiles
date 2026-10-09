@@ -1,0 +1,204 @@
+{
+  "extends": [
+    "nolabs-ai/pi"
+  ],
+  "meta": {
+    "name": "pi",
+    "version": "",
+    "description": null,
+    "author": null
+  },
+  "security": {
+    "signal_mode": null,
+    "process_info_mode": null,
+    "ipc_mode": null,
+    "capability_elevation": null,
+    "approval_backends": {},
+    "approval_defaults": null,
+    "wsl2_proxy_policy": null
+  },
+  "groups": {
+    "include": [
+      {
+        "name": "linux_temp_read",
+        "when": "linux"
+      }
+    ],
+    "exclude": []
+  },
+  "commands": {
+    "allow": [],
+    "deny": []
+  },
+  "filesystem": {
+    "allow": [
+      "$HOME/package.json",
+      "$HOME/.agent-browser",
+      "/tmp/pi-scratchpad",
+      "/tmp/pi-editor",
+      "/tmp/pi-subagents-uid-$UID",
+      "/proc/sys/vm/overcommit_memory",
+      "$XDG_DATA_HOME/nvim",
+      "$HOME/.local/state/nvim"
+    ],
+    "read": [
+      "/tmp/jiti",
+      "/tmp/node-compile-cache",
+      "/tmp/pi-rtk-optimizer",
+      "/etc/host.conf",
+      "$XDG_CONFIG_HOME/rpiv-i18n",
+      "$XDG_CONFIG_HOME/gh/config.yml",
+      "$XDG_CONFIG_HOME/gh/hosts.yml",
+      "$XDG_DATA_HOME/rtk",
+      "$XDG_DATA_HOME/gon/pkg/mod",
+      "$HOME/.herdr/worktrees",
+      "$HOME/.local/state/herdr/client",
+      "$DOTFILES_HOME/.agents/skills"
+    ],
+    "write": [],
+    "allow_file": [],
+    "read_file": [],
+    "write_file": [],
+    "unix_socket": [
+      "$XDG_RUNTIME_DIR/wayland-0"
+    ],
+    "unix_socket_bind": [],
+    "unix_socket_dir": [
+      "$XDG_CONFIG_HOME/herdr",
+      "$DOTFILES_HOME/pi/agent/intercom",
+      "/tmp/piab-$UID"
+    ],
+    "unix_socket_dir_bind": [
+      "$XDG_RUNTIME_DIR/sandbox"
+    ],
+    "unix_socket_subtree": [],
+    "unix_socket_subtree_bind": [],
+    "deny": [
+      "$XDG_CONFIG_HOME/zsh-secrets",
+      "$XDG_CONFIG_HOME/zsh/secrets.env"
+    ],
+    "bypass_protection": [],
+    "suppress_save_prompt": []
+  },
+  "network": {
+    "block": false,
+    "allow_http2": false,
+    "allow_domain": [],
+    "deny_domain": [],
+    "credentials": [],
+    "open_port": [],
+    "open_port_range": [],
+    "listen_port": [],
+    "listen_port_range": [],
+    "connect_port": [],
+    "no_proxy": [],
+    "custom_credentials": {
+      "opencode": {
+        "upstream": "https://opencode.ai/zen/go/v1",
+        "credential_key": "OPENCODE_API_KEY",
+        "inject_header": "Authorization",
+        "credential_format": "Bearer {}",
+        "env_var": "OPENCODE_API_KEY"
+      },
+      "github": {
+        "upstream": "https://api.github.com",
+        "credential_key": "GITHUB_TOKEN",
+        "inject_header": "Authorization",
+        "credential_format": "token {}",
+        "env_var": "CLI_GITHUB_TOKEN"
+      }
+    },
+    "tls_intercept": null,
+    "upstream_proxy": null,
+    "upstream_bypass": []
+  },
+  "diagnostics": {
+    "suppress_system_services": []
+  },
+  "linux": {
+    "af_unix_mediation": null,
+    "sandbox_policy": null
+  },
+  "environment": {
+    "allow_vars": [
+      "PATH",
+      "HOME",
+      "USER",
+      "HOSTNAME",
+      "LOGNAME",
+      "SHELL",
+      "TERM",
+      "TERM_PROGRAM",
+      "COLORTERM",
+      "LANG",
+      "LC_*",
+      "TZ",
+      "TMPDIR",
+      "XDG_*",
+      "HERDR_*",
+      "PI_*",
+      "NONO_*",
+      "SSH_AUTH_SOCK",
+      "EDITOR",
+      "VISUAL",
+      "PAGER",
+      "NIX_*",
+      "SSL_CERT_FILE",
+      "OPENCODE_API_KEY",
+      "EXA_API_KEY",
+      "CLI_GITHUB_TOKEN"
+    ],
+    "set_vars": {
+      "XDG_RUNTIME_DIR": "$XDG_RUNTIME_DIR/sandbox",
+      "WAYLAND_DISPLAY": "$XDG_RUNTIME_DIR/wayland-0"
+    }
+  },
+  "credential_capture": {},
+  "credential_providers": {},
+  "credential_routes": [],
+  "workdir": {
+    "access": "readwrite"
+  },
+  "hooks": {},
+  "session_hooks": {},
+  "rollback": {
+    "exclude_patterns": [
+      "node_modules",
+      ".npm/_logs/",
+      ".next",
+      "__pycache__",
+      "target",
+      ".pi",
+      ".pi-subagents",
+      "dist",
+      "build",
+      ".venv",
+      "vendor",
+      ".turbo",
+      ".cache",
+      "/tmp/pi-subagents-uid-",
+      "/tmp/pi-scratchpad",
+      "/tmp/pi-editor",
+      "$HOME/.agent-browser/",
+      "$HOME/.local/state/nvim/",
+      "$XDG_DATA_HOME/nvim/",
+      "$DOTFILES_HOME/pi/web-search-cache/",
+      "$DOTFILES_HOME/pi/agent/pi-blackhole/",
+      "$DOTFILES_HOME/pi/agent/sessions/",
+      "$DOTFILES_HOME/pi/agent/intercom/",
+      "$DOTFILES_HOME/pi/agent/missions/",
+      "$DOTFILES_HOME/pi/agent/run-history.jsonl",
+      "$DOTFILES_HOME/pi/agent/models-store.json",
+      "$DOTFILES_HOME/pi/agent/pi-speeed-stats.json"
+    ],
+    "exclude_globs": [
+      "*.tmp.[0-9]*.[0-9]*",
+      "*.mdb",
+      "*.pid"
+    ]
+  },
+  "skipdirs": [],
+  "packs": [],
+  "command_args": [],
+  "unsafe_macos_seatbelt_rules": []
+}

@@ -1,0 +1,108 @@
+{
+  "debug": false,
+  "debugLog": false,
+  "sessionFallback": true,
+  "memory": true,
+  "compaction": "auto",
+  "midRunCompaction": "resume",
+  "compactionEngine": "blackhole",
+  "tailBehavior": "minimal",
+  "statusBar": false,
+  "observeAfterTokens": 15000,
+  "reflectAfterTokens": 25000,
+  "compactAfterTokens": 180000,
+  "observationsPoolMaxTokens": 10000,
+  "observationsPoolTargetTokens": 5000,
+  "reflectorInputMaxTokens": 80000,
+  "dropperInputMaxTokens": 80000,
+  "dropperPressureThreshold": 0.7,
+  "observerChunkMaxTokens": 40000,
+  "observerPreambleMaxTokens": 0,
+  "agentMaxTurns": 16,
+  "model": {
+    "_comment": "Base model (last fallback before session model).",
+    "provider": "opencode-go",
+    "id": "mimo-v2.5",
+    "thinking": "low",
+    "cooldownHours": 1
+  },
+  "observerModel": {
+    "_comment": "Observer primary: Qwen3 Next 80B via OpenRouter free (strong extraction with reasoning).",
+    "provider": "opencode",
+    "id": "big-pickle",
+    "thinking": "low",
+    "cooldownHours": 1
+  },
+  "observerFallbackModels": [
+    {
+      "provider": "opencode-go",
+      "id": "mimo-v2.5",
+      "thinking": "low",
+      "cooldownHours": 1
+    },
+    {
+      "provider": "opencode-go",
+      "id": "muse-spark-1.3-contributor",
+      "thinking": "low",
+      "cooldownHours": 1
+    }
+  ],
+  "reflectorModel": {
+    "_comment": "Reflector primary trong reasoning for synthesis",
+    "provider": "opencode",
+    "id": "big-pickle",
+    "thinking": "low",
+    "cooldownHours": 1
+  },
+  "reflectorFallbackModels": [
+    {
+      "provider": "opencode-go",
+      "id": "mimo-v2.5",
+      "thinking": "low",
+      "cooldownhours": 1
+    },
+    {
+      "provider": "opencode-go",
+      "id": "muse-spark-1.3-contributor",
+      "thinking": "low",
+      "cooldownHours": 1
+    },
+    {
+      "provider": "openrouter",
+      "id": "google/gemma-4-31b-it:free",
+      "thinking": "low",
+      "cooldownHours": 1
+    }
+  ],
+  "dropperModel": {
+    "_comment": "Dropper primary: (judgment/prioritization).",
+    "provider": "opencode",
+    "id": "big-pickle",
+    "thinking": "low",
+    "cooldownHours": 1
+  },
+  "dropperFallbackModels": [
+    {
+      "provider": "opencode-go",
+      "id": "mimo-v2.5",
+      "thinking": "low",
+      "cooldownHours": 1
+    },
+    {
+      "provider": "opencode-go",
+      "id": "muse-spark-1.3-contributor",
+      "thinking": "low",
+      "cooldownHours": 1
+    }
+  ],
+  "compactionSummaryMode": "default",
+  "skipForProviders": [],
+  "showPreCompactionMessage": true,
+  "retainedToolOutputMaxTokens": 20000,
+  "recallResponseMaxChars": 48000,
+  "compactAfterPreset": "default",
+  "reflectionsPoolMaxTokens": 8000,
+  "fullFoldAlways": true,
+  "dropperPoolFullnessThreshold": 0.1,
+  "showWorkerNotifications": true
+}

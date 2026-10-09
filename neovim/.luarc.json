@@ -1,0 +1,9 @@
+{
+    "workspace.library": [
+        "/usr/share/nvim/runtime/lua",
+        "/home/alinski/.local/share/nvim/lazy/LazyVim/lua",
+        "/home/alinski/.local/share/nvim/lazy/lazy.nvim/lua",
+        "${3rd}/luv/library",
+        "/home/alinski/.local/share/nvim/mason/packages/lua-language-server/meta/3cba1fb0"
+    ]
+}

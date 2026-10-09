@@ -1,0 +1,328 @@
+{
+  "$schema": "https://unpkg.com/@aliou/pi-guardrails@0.19.0/schema.json",
+  "version": "0.19.0",
+  "enabled": true,
+  "applyBuiltinDefaults": false,
+  "onboarding": {
+    "completed": true,
+    "completedAt": "2026-05-22T17:38:31.224Z",
+    "version": "0.9.0-20260327"
+  },
+  "features": {
+    "policies": true,
+    "permissionGate": true,
+    "pathAccess": false
+  },
+  "policies": {
+    "rules": [
+      {
+        "id": "secret-files",
+        "description": "Files containing secrets. Protected patterns use regex, not '**' globs, because Node path.matchesGlob does not let '**' cross a dot-prefixed directory segment (e.g. proj/.config/.env was NOT matched by **/.env*). Residual holes accepted by decision: (1) directory targets - grep/find/ls on a directory bypass file policies; (2) shell glob expansion is broken upstream - cat .env* extracts no targets; (3) interpreter reads (python3 -c open()) are invisible; (4) symlinks are matched lexically only. Mitigation: keep secrets out of cwd (nono credentials / env vars).",
+        "protection": "noAccess",
+        "onlyIfExists": true,
+        "patterns": [
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.env"
+          },
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.dev\\.vars$"
+          },
+          {
+            "pattern": "*.env"
+          }
+        ],
+        "allowedPatterns": [
+          {
+            "pattern": ".env.example"
+          },
+          {
+            "pattern": ".env.sample"
+          },
+          {
+            "pattern": ".env.test"
+          },
+          {
+            "pattern": "*.example.env"
+          },
+          {
+            "pattern": "*.sample.env"
+          },
+          {
+            "pattern": "*.test.env"
+          }
+        ]
+      },
+      {
+        "id": "home-ssh",
+        "protection": "noAccess",
+        "respectCwd": false,
+        "patterns": [
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.ssh/"
+          },
+          {
+            "pattern": "~/.ssh/**"
+          },
+          {
+            "pattern": "~/.ssh/*_rsa"
+          },
+          {
+            "pattern": "~/.ssh/*_ed25519"
+          }
+        ],
+        "allowedPatterns": [
+          {
+            "pattern": "~/.ssh/*.pub"
+          }
+        ]
+      },
+      {
+        "id": "home-config",
+        "protection": "noAccess",
+        "respectCwd": false,
+        "patterns": [
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.config/gh/"
+          },
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.config/gcloud/"
+          },
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.config/op/"
+          },
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.config/sops/"
+          },
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.aws/"
+          },
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.kube/"
+          }
+        ]
+      },
+      {
+        "id": "home-gpg",
+        "protection": "noAccess",
+        "respectCwd": false,
+        "patterns": [
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.gnupg/"
+          },
+          {
+            "pattern": "~/*.gpg"
+          },
+          {
+            "pattern": "~/.gpg-agent.conf"
+          }
+        ]
+      },
+      {
+        "id": "key-material",
+        "protection": "noAccess",
+        "respectCwd": false,
+        "patterns": [
+          {
+            "pattern": "*.pem"
+          },
+          {
+            "pattern": "*.key"
+          },
+          {
+            "pattern": ".credentials*"
+          },
+          {
+            "pattern": "credentials*.json"
+          },
+          {
+            "pattern": "credentials*.yaml"
+          },
+          {
+            "pattern": "credentials*.yml"
+          },
+          {
+            "pattern": "credentials*.toml"
+          },
+          {
+            "pattern": "credentials*.ini"
+          },
+          {
+            "pattern": "credentials*.env"
+          },
+          {
+            "regex": true,
+            "pattern": "(^|/)secrets[^/]*\\.env$"
+          }
+        ]
+      },
+      {
+        "id": "pi-agent-secrets",
+        "protection": "noAccess",
+        "respectCwd": false,
+        "patterns": [
+          {
+            "pattern": "~/.pi/agent/auth.json"
+          },
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.pi/agent/auth\\.json$"
+          },
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.pi/.*\\.env$"
+          }
+        ]
+      },
+      {
+        "id": "guardrails-config",
+        "protection": "readOnly",
+        "respectCwd": false,
+        "onlyIfExists": false,
+        "patterns": [
+          {
+            "pattern": "~/.pi/agent/extensions/guardrails.json"
+          },
+          {
+            "pattern": ".pi/extensions/guardrails.json"
+          },
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.pi/agent/extensions/guardrails\\.json$"
+          },
+          {
+            "regex": true,
+            "pattern": "(^|/)\\.pi/extensions/guardrails\\.json$"
+          }
+        ]
+      }
+    ]
+  },
+  "permissionGate": {
+    "requireConfirmation": false,
+    "customPatterns": [
+      {
+        "regex": true,
+        "pattern": "(^|\\s)--network=host(\\s|$)",
+        "description": "container with host network namespace (warn only)"
+      }
+    ],
+    "autoDenyPatterns": [
+      {
+        "regex": true,
+        "pattern": "(^|[;&|]\\s*)(?:\\S*/)?(?:sudo|doas|pkexec)\\b",
+        "description": "privilege escalation"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|[;&|]\\s*)(?:\\S*/)?(?:mkfs|wipefs|blkdiscard|fdisk|sfdisk|cfdisk|parted|sgdisk|shred)\\b",
+        "description": "filesystem or disk destruction"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|[;&|]\\s*)(?:\\S*/)?chmod\\s+(?:-[a-zA-Z]*[rR][a-zA-Z]*|--recursive)\\s+(?:0?777|a\\+rwx|ugo\\+rwx|1777|7777)(?:\\s|$)",
+        "description": "world-writable recursive chmod"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|[;&|]\\s*)(?:\\S*/)?chown\\s+(?:-[a-zA-Z]*[rR][a-zA-Z]*|--recursive)\\b",
+        "description": "recursive ownership change"
+      },
+      {
+        "pattern": "of=/dev/",
+        "description": "raw write to a block device"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|[;&|]\\s*)(?:\\S+/)?rm\\s+[^\\n;&|]*\\s+/(?:\\s|\\*|$)",
+        "description": "recursive delete of the filesystem root"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|[;&|]\\s*)(?:\\S+/)?rm\\s+(?=[^\\n;&|]*(?<!\\S)(?:-[a-zA-Z]*[rR][a-zA-Z]*|--recursive|--dir)(?:\\s|$))(?=[^\\n;&|]*(?<!\\S)(?:-[a-zA-Z]*f[a-zA-Z]*|--force)(?:\\s|$))[^\\n;&|]*\\s/tmp/pi-scratchpad/?(?:[;&|]|\\s|$)",
+        "description": "recursive delete of /tmp/pi-scratchpad itself - a subpath is required, e.g. /tmp/pi-scratchpad/<name>"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|[;&|]\\s*)cd\\s+/tmp/pi-scratchpad(?:/[^&;\\s]*)?\\s*&&\\s*rm\\s+-[a-zA-Z]+\\s+(?:\\.{1,2})(?:\\s|;|&|\\||$)",
+        "description": "recursive delete of /tmp/pi-scratchpad itself (cd + rm . / ..) - a subpath is required, e.g. /tmp/pi-scratchpad/<name>"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|[;&|]\\s*)(?:\\S+/)?rm\\s+(?=[^\\n;&|]*(?<!\\S)(?:-[a-zA-Z]*[rR][a-zA-Z]*|--recursive|--dir)(?:\\s|$))(?=[^\\n;&|]*(?<!\\S)(?:-[a-zA-Z]*f[a-zA-Z]*|--force)(?:\\s|$))",
+        "description": "recursive force delete"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|[;&|]\\s*)dd\\s[^\\n;&|]*of=",
+        "description": "disk write operation"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|\\s)--privileged(=|\\s|$)",
+        "description": "container with privileged mode"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|\\s)--pid=host(\\s|$)",
+        "description": "container with host PID namespace"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|\\s)--userns=host(\\s|$)",
+        "description": "container with host user namespace"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|\\s)--uts=host(\\s|$)",
+        "description": "container with host UTS namespace"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|\\s)--ipc=host(\\s|$)",
+        "description": "container with host IPC namespace"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|\\s)(?:-v|--volume)(?:=|\\s)?/",
+        "description": "container with root filesystem mount"
+      },
+      {
+        "regex": true,
+        "pattern": "(^|\\s)--mount=type=bind,source=/",
+        "description": "container with root filesystem bind mount"
+      },
+      {
+        "regex": true,
+        "pattern": "/(?:var/)?run/(?:docker|podman)\\.sock",
+        "description": "container with docker socket access"
+      }
+    ],
+    "allowedPatterns": [
+      {
+        "regex": true,
+        "pattern": "^\\s*rm\\s+-[a-zA-Z]+\\s+(?![\\s\\S]*(?:\\.\\.|[~$]))/tmp/pi-scratchpad/[^&;\\s]+$",
+        "description": "delete inside scratchpad (subpath required)"
+      },
+      {
+        "regex": true,
+        "pattern": "^\\s*rm\\s+-[a-zA-Z]+\\s+(?![\\s\\S]*(?:\\.\\.|[~$]))/tmp/(?:jiti|node-compile-cache)(?:/[^&;\\s]*)?$",
+        "description": "disposable cache directory"
+      },
+      {
+        "regex": true,
+        "pattern": "^(?![\\s\\S]*(?:\\.\\.|[~$]))cd\\s+/tmp/pi-scratchpad(?:/[^&;\\s]*)?\\s*&&\\s*rm\\s+-[a-zA-Z]+\\s+(?!\\.{1,2}(?:\\s|&|;|\\||$))(?!/)(?![\\s\\S]*(?:\\.\\.|[~$]|\\s/))[^&;]*$",
+        "description": "delete inside scratchpad (cd form)"
+      }
+    ]
+  }
+}

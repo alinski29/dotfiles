@@ -1,0 +1,43 @@
+{
+  "lastChangelogVersion": "1.1.0",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "deepseek-v4.1-flash",
+  "packages": [
+    "npm:@aliou/pi-guardrails",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:pi-web-access",
+    "npm:pi-tool-display",
+    "npm:pi-subagents",
+    "npm:pi-caveman",
+    "npm:pi-rtk-optimizer",
+    "npm:pi-intercom",
+    "npm:@ff-labs/pi-fff",
+    "npm:pi-blackhole",
+    "npm:pi-zentui",
+    "npm:pi-speeed",
+    {
+      "source": "~/.config/nono/packages/nolabs-ai/pi"
+    }
+  ],
+  "defaultTools": [
+    "+codemode"
+  ],
+  "hideThinkingBlock": false,
+  "terminal": {
+    "showImages": true,
+    "images": "kitty"
+  },
+  "subagents": {
+    "disableBuiltins": true,
+    "maxSubagentDepth": 1,
+    "artifactDir": "project"
+  },
+  "enabledModels": [
+    "opencode-go/*",
+    "opencode/big-pickle"
+  ],
+  "defaultThinkingLevel": "medium",
+  "theme": "dark",
+  "powerline": "compact"
+}
