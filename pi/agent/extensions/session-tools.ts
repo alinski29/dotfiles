@@ -397,12 +397,12 @@ export default function (pi: ExtensionAPI) {
     },
   });
 
-  pi.registerShortcut(Key.ctrlShift("g"), {
-    description: "Open last assistant message in editor",
-    handler: async (ctx) => {
-      await openInEditor(ctx, "");
-    },
-  });
+  // pi.registerShortcut(Key.ctrlShift("g"), {
+  //   description: "Open last assistant message in editor",
+  //   handler: async (ctx) => {
+  //     await openInEditor(ctx, "");
+  //   },
+  // });
 
   pi.registerCommand("export-md", {
     description:
