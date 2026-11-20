@@ -65,6 +65,12 @@ in
   home.file = {
     ".config/nvim".source = link "neovim";
     ".config/herdr/config.toml".source = link "herdr/config.toml";
+    # Herdr hardcodes ~/.herdr/worktrees as its worktree root. Point it at the
+    # synced disk so agent worktrees survive rebuilds and land where the rest of
+    # the working copies live. mkOutOfStoreSymlink is required because the
+    # target is a mutable directory outside the store.
+    ".herdr/worktrees".source =
+      config.lib.file.mkOutOfStoreSymlink "${homeDir}/syncthing/worktrees";
     # The global skill manifest.
     ".agents/skills.txt".source = link ".agents/global-skills.txt";
     ".local/bin/rebuild-env".source = link "scripts/rebuild-env.sh";
