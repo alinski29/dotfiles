@@ -100,29 +100,98 @@
   "network": {
     "block": false,
     "allow_http2": false,
-    "allow_domain": [],
+    "allow_domain": [
+      "*"
+    ],
     "deny_domain": [],
-    "credentials": [],
+    "credentials": [
+      "github",
+      "github-git",
+      "opencode",
+      "openrouter",
+      "exa",
+      "gemini"
+    ],
     "open_port": [],
-    "open_port_range": [],
+    "open_port_range": [
+      [
+        3000,
+        3010
+      ],
+      [
+        3333,
+        3333
+      ],
+      [
+        4200,
+        4331
+      ],
+      [
+        5173,
+        5183
+      ],
+      [
+        8080,
+        8090
+      ],
+      [
+        8787,
+        8787
+      ],
+      [
+        9222,
+        9242
+      ]
+    ],
     "listen_port": [],
     "listen_port_range": [],
     "connect_port": [],
     "no_proxy": [],
     "custom_credentials": {
+      "github": {
+        "upstream": "https://api.github.com",
+        "credential_key": "cmd://github",
+        "inject_mode": "header",
+        "inject_header": "Authorization",
+        "credential_format": "token {}",
+        "env_var": "GH_TOKEN"
+      },
+      "github-git": {
+        "upstream": "https://github.com",
+        "credential_key": "cmd://github",
+        "inject_mode": "basic_auth",
+        "credential_format": "x-access-token:{}",
+        "env_var": "GH_TOKEN"
+      },
       "opencode": {
         "upstream": "https://opencode.ai/zen/go/v1",
-        "credential_key": "OPENCODE_API_KEY",
+        "credential_key": "env://OPENCODE_API_KEY",
         "inject_header": "Authorization",
         "credential_format": "Bearer {}",
         "env_var": "OPENCODE_API_KEY"
       },
-      "github": {
-        "upstream": "https://api.github.com",
-        "credential_key": "GITHUB_TOKEN",
+      "openrouter": {
+        "upstream": "https://openrouter.ai/api/v1",
+        "credential_key": "env://OPENROUTER_API_KEY",
         "inject_header": "Authorization",
-        "credential_format": "token {}",
-        "env_var": "CLI_GITHUB_TOKEN"
+        "credential_format": "Bearer {}",
+        "env_var": "OPENROUTER_API_KEY"
+      },
+      "exa": {
+        "upstream": "https://api.exa.ai",
+        "credential_key": "env://EXA_API_KEY",
+        "inject_mode": "header",
+        "inject_header": "x-api-key",
+        "credential_format": "{}",
+        "env_var": "EXA_API_KEY"
+      },
+      "gemini": {
+        "upstream": "https://generativelanguage.googleapis.com",
+        "credential_key": "env://GEMINI_API_KEY",
+        "inject_mode": "header",
+        "inject_header": "x-goog-api-key",
+        "credential_format": "{}",
+        "env_var": "GEMINI_API_KEY"
       }
     },
     "tls_intercept": null,
@@ -134,7 +203,7 @@
   },
   "linux": {
     "af_unix_mediation": null,
-    "sandbox_policy": null
+    "sandbox_policy": "landlock"
   },
   "environment": {
     "allow_vars": [
