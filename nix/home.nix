@@ -81,6 +81,22 @@ in
           "${config.xdg.configHome}/zsh-secrets/secrets.${role}.env";
   };
 
+  # Every `home-manager switch` (and every write to the nix profile) keeps the old
+  # generation as a GC root, and a generation pins a whole store closure: after six
+  # weeks this box carried 373 of them, ~26 GiB of a 31 GiB store. Plain GC frees
+  # nothing in that state (`nix-collect-garbage --dry-run` -> "0 store paths would
+  # be deleted"), so the generation pruning below is the part that reclaims.
+  #
+  # `--delete-older-than` applies to every profile owned by this user, so both
+  # ~/.local/state/nix/profiles/home-manager-* and .../profile-* are covered. 14d
+  # keeps a two-week rollback window; drop to 7d if the churn stays at ~8/day.
+  # The timer is a systemd *user* timer (weekly by default), so on a host where
+  # nobody stays logged in it only fires with `loginctl enable-linger`.
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 14d";
+  };
+
   programs.zsh = {
     enable = true;
     # Owns ~/.zshenv, ~/.config/zsh/.zshenv and ~/.config/zsh/.zshrc.
