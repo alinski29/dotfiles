@@ -140,7 +140,24 @@ pi() {
   # session D-Bus, Wayland, PipeWire and agent sockets, so a recursive r+w grant on
   # it would hand the sandbox all of them. Pre-created because nvim does not create
   # stdpath("run") itself and a grant on a missing path is inert.
-  install -d -m 0700 "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/sandbox" 2>/dev/null || true
+  _pi_rt=${XDG_RUNTIME_DIR:-/run/user/$(id -u)}
+  install -d -m 0700 "$_pi_rt/sandbox" 2>/dev/null || true
+
+  # The compositor picks its socket name at runtime (wayland-0, wayland-1 after a
+  # restart), which a static profile cannot know, and a stale name is what breaks
+  # wl-copy/wl-paste inside the sandbox. So the profile points WAYLAND_DISPLAY at
+  # the stable $_pi_rt/sandbox/wayland-0 (set_vars) and this refreshes that
+  # symlink to the session's real socket on every launch. Best effort, like the
+  # installs above: no Wayland means no clipboard, not a failed launch.
+  _pi_wl=${WAYLAND_DISPLAY:-}
+  case "$_pi_wl" in
+  '') ;;
+  /*) ;;
+  *) _pi_wl="$_pi_rt/$_pi_wl" ;;
+  esac
+  if [ -n "$_pi_wl" ] && [ -S "$_pi_wl" ]; then
+    ln -sfn "$_pi_wl" "$_pi_rt/sandbox/wayland-0" 2>/dev/null || true
+  fi
 
   # --allow-cwd grants the directory pi was started in; everything sensitive under
   # it is the guardrails layer's job.
