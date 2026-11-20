@@ -7,6 +7,8 @@
 - Never modify any files that are marked as auto-generated
 - Use `/tmp/pi-scratchpad/{unix-ts}_{id-or-slug}` for experiments, throwaway files, scratch scripts and cloned repos you do not intend to keep. Do not write scratch output into the project worktree.
 - If you ask me questions, use the `ask_user_question` tool.
+- Line length is set at 120 characters, try to follow that when writing or editing files, **AVOID** wrapping text at shorter breaks.
+- When doing git commits, use conventional commits and keep them concise, aim for one-liners. 
 
 ## Tool selection
 
