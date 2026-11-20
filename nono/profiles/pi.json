@@ -34,12 +34,20 @@
     "allow": [
       "$HOME/package.json",
       "$HOME/.agent-browser",
+      "$HOME/.pi-lens",
+      "$HOME/.local/state/nvim",
+      "$HOME/.npm",
+      "$HOME/go",
+      "$HOME/node_modules",
       "/tmp/pi-scratchpad",
       "/tmp/pi-editor",
       "/tmp/pi-subagents-uid-$UID",
       "/proc/sys/vm/overcommit_memory",
       "$XDG_DATA_HOME/nvim",
-      "$HOME/.local/state/nvim"
+      "$XDG_DATA_HOME/gon/pkg/mod",
+      "$XDG_DATA_HOME/cargo",
+      "$XDG_CONFIG_HOME/astro",
+      "$XDG_CACHE_HOME/huggingface"
     ],
     "read": [
       "/tmp/jiti",
@@ -47,20 +55,29 @@
       "/tmp/pi-rtk-optimizer",
       "/etc/host.conf",
       "$XDG_CONFIG_HOME/rpiv-i18n",
-      "$XDG_CONFIG_HOME/gh/config.yml",
-      "$XDG_CONFIG_HOME/gh/hosts.yml",
+      "$DOTFILES_HOME/nono/gh-sandbox",
       "$XDG_DATA_HOME/rtk",
-      "$XDG_DATA_HOME/gon/pkg/mod",
+      "$XDG_DATA_HOME/gon",
       "$HOME/.herdr/worktrees",
       "$HOME/.local/state/herdr/client",
-      "$DOTFILES_HOME/.agents/skills"
+      "$HOME/.pi/agent/npm/node_modules/pi-subagents",
+      "$HOME/.docker",
+      "$DOTFILES_HOME/.agents/skills",
+      "$DOTFILES_HOME/neovim",
+      "$DOTFILES_HOME/nono/gh-sandbox",
+      "$XDG_CACHE_HOME/docproc",
+      "/usr/include",
+      "/usr/lib",
+      "/usr/lib32",
+      "/usr/lib64",
+      "/usr/bin"
     ],
     "write": [],
     "allow_file": [],
     "read_file": [],
     "write_file": [],
     "unix_socket": [
-      "$XDG_RUNTIME_DIR/wayland-0"
+      "$XDG_RUNTIME_DIR/sandbox/wayland-0"
     ],
     "unix_socket_bind": [],
     "unix_socket_dir": [
@@ -144,16 +161,32 @@
       "PAGER",
       "NIX_*",
       "SSL_CERT_FILE",
-      "OPENCODE_API_KEY",
-      "EXA_API_KEY",
-      "CLI_GITHUB_TOKEN"
+      "DOTFILES_HOME"
     ],
     "set_vars": {
       "XDG_RUNTIME_DIR": "$XDG_RUNTIME_DIR/sandbox",
-      "WAYLAND_DISPLAY": "$XDG_RUNTIME_DIR/wayland-0"
+      "WAYLAND_DISPLAY": "$XDG_RUNTIME_DIR/sandbox/wayland-0",
+      "GH_CONFIG_DIR": "~/.dotfiles/nono/gh-sandbox",
+      "GIT_CONFIG_NOSYSTEM": "1",
+      "AGENT_BROWSER_ARGS": "--no-sandbox,--disable-dev-shm-usage,--ozone-platform-hint=auto",
+      "AGENT_BROWSER_EXECUTABLE_PATH": "$HOME/.local/bin/agent-browser-chrome",
+      "AGENT_BROWSER_NO_XVFB": "1",
+      "WRANGLER_LOG_PATH": "$HOME/.cache/wrangler",
+      "WRANGLER_SEND_METRICS": "false"
     }
   },
-  "credential_capture": {},
+  "credential_capture": {
+    "github": {
+      "command": [
+        "gh",
+        "auth",
+        "token"
+      ],
+      "timeout_secs": 5,
+      "cache_ttl_secs": 900,
+      "cache_path_regex": "^/(?:repos/|orgs/)?([^/]+)"
+    }
+  },
   "credential_providers": {},
   "credential_routes": [],
   "workdir": {
@@ -177,11 +210,18 @@
       ".turbo",
       ".cache",
       "/tmp/pi-subagents-uid-",
+      "/tmp/pi-subagents-uid-1000",
       "/tmp/pi-scratchpad",
       "/tmp/pi-editor",
       "$HOME/.agent-browser/",
       "$HOME/.local/state/nvim/",
+      "$HOME/.npm/",
+      "$HOME/.pi-lens",
+      "$HOME/go",
+      "$HOME/node_modules",
       "$XDG_DATA_HOME/nvim/",
+      "$XDG_DATA_HOME/gon",
+      "$XDG_DATA_HOME/cargo/",
       "$DOTFILES_HOME/pi/web-search-cache/",
       "$DOTFILES_HOME/pi/agent/pi-blackhole/",
       "$DOTFILES_HOME/pi/agent/sessions/",
@@ -189,7 +229,8 @@
       "$DOTFILES_HOME/pi/agent/missions/",
       "$DOTFILES_HOME/pi/agent/run-history.jsonl",
       "$DOTFILES_HOME/pi/agent/models-store.json",
-      "$DOTFILES_HOME/pi/agent/pi-speeed-stats.json"
+      "$DOTFILES_HOME/pi/agent/pi-speeed-stats.json",
+      "$XDG_CACHE_HOME/huggingface"
     ],
     "exclude_globs": [
       "*.tmp.[0-9]*.[0-9]*",
