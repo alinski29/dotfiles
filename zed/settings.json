@@ -47,7 +47,7 @@
   "cli_default_open_behavior": "existing_window",
   "diff_view_style": "split",
   "icon_theme": {
-    "mode": "dark",
+    "mode": "light",
     "light": "Zed (Default)",
     "dark": "JetBrains New UI Icons (Dark)",
   },
@@ -102,7 +102,7 @@
     "model_parameters": [],
   },
   "edit_predictions": {
-    "provider": "zed",
+    "provider": "copilot",
   },
   "project_panel": {
     "dock": "right",
@@ -110,7 +110,7 @@
   "vim_mode": true,
   "terminal": {
     "show_count_badge": false,
-    "font_family": "JetBrainsMono Nerd Font Mono",
+    "font_family": "CommitMono Nerd Font",
   },
   "base_keymap": "VSCode",
   "relative_line_numbers": "enabled",
@@ -176,29 +176,18 @@
     //   "language_servers": ["vtsls"],
     // },
     "TypeScript": {
-      "language_servers": [
-        "typescript-ls",
-        "!vtsls",
-        "!typescript-language-server",
-      ],
+      "language_servers": ["typescript-ls", "!vtsls", "!typescript-language-server"],
     },
     "TSX": {
-      "language_servers": [
-        "typescript-ls",
-        "!vtsls",
-        "!typescript-language-server",
-      ],
+      "language_servers": ["typescript-ls", "!vtsls", "!typescript-language-server"],
     },
     "JavaScript": {
-      "language_servers": [
-        "typescript-ls",
-        "!vtsls",
-        "!typescript-language-server",
-      ],
+      "language_servers": ["typescript-ls", "!vtsls", "!typescript-language-server"],
     },
     "Go": {
       "formatter": "language_server",
       "format_on_save": "on",
+      "preferred_line_length": 120,
     },
     "Proto": {
       "formatter": "language_server",
@@ -221,6 +210,13 @@
     "Nix": {
       "language_servers": ["nixd"],
     },
+    // "Markdown": {
+    //   "format_on_save": "on",
+    //   "formatter": "prettier",
+    //   "prettier": {
+    //     "allowed": true,
+    //   },
+    // },
     // "Svelte": {
     //   "prettier": {
     //     "allowed": false,
