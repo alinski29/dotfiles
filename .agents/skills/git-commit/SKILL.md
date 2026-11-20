@@ -15,11 +15,11 @@ Create standardized, semantic git commits using the Conventional Commits specifi
 
 ```
 <type>[optional scope]: <description>
-
-[optional body]
-
-[optional footer(s)]
 ```
+
+<important>
+Keep the commit description short, aim for a single sentence. More than one sentence should be an exception for very large changes, but then, prefer multiple commits.
+</important>
 
 ## Commit Types
 
