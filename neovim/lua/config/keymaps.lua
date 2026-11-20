@@ -115,3 +115,29 @@ vim.keymap.set("n", "<leader>my", function()
   vim.fn.setreg("+", content)
   vim.notify("Copied " .. #lines .. " lines to clipboard", vim.log.levels.INFO)
 end, { desc = "Mole: copy annotations to clipboard" })
+
+-- Copy path relative to cwd, with line range: <file>:<start>-<end>
+local function copy_path_lines()
+  local file = vim.fn.expand("%")
+  if file == "" then
+    vim.notify("No file name", vim.log.levels.WARN)
+    return
+  end
+  local rel = vim.fn.fnamemodify(file, ":.")
+  local mode = vim.fn.mode()
+  local start, stop
+  if mode == "v" or mode == "V" or mode == "\22" then
+    -- '< / '> are only set after leaving visual mode, so read live positions
+    start, stop = vim.fn.line("v"), vim.fn.line(".")
+    if start > stop then
+      start, stop = stop, start
+    end
+  else
+    start, stop = vim.fn.line("."), vim.fn.line(".")
+  end
+  local out = string.format("%s:%d-%d", rel, start, stop)
+  vim.fn.setreg("+", out)
+  vim.notify("Copied: " .. out, vim.log.levels.INFO)
+end
+
+vim.keymap.set({ "n", "v" }, "<C-y>", copy_path_lines, { desc = "Copy relative path:start-end" })
