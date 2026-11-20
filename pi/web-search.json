@@ -1,5 +1,8 @@
 {
   "workflow": "none",
   "exaApiKey": "${EXA_API_KEY}",
-  "geminiApiKey": "${GEMINI_API_KEY}"
+  "geminiApiKey": "${GEMINI_API_KEY}",
+  "ssrf": {
+    "trustEnvProxy": true
+  }
 }
