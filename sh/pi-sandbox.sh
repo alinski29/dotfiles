@@ -9,8 +9,44 @@
 #
 # --no-sandbox runs the real pi, unsandboxed and unfiltered.
 #
+# A `.nono-profile` file in the launch directory selects another profile for that
+# session; without one, the default `pi` profile is used. See _pi_marker_profile.
+#
 # POSIX sh only, like sh/env.sh: sourced by both zsh and bash. Rationale:
 # docs/plans/pi-sandbox-wrapper.md.
+
+# Profile name selected by a `.nono-profile` marker in the launch directory, or
+# non-zero when the marker is absent or does not hold exactly one bare name.
+#
+# The marker holds a *name*, never a path. Profile contents live in
+# ~/.config/nono/profiles, which nono keeps read-only inside the sandbox, so a
+# workspace can choose between profiles a human authored but cannot author one.
+# The marker itself is agent-writable - it sits in the --allow-cwd tree - so
+# anything that is not a bare name is refused instead of handed to nono: no
+# paths, no `..`, no `$VARS`. A marker that fails this check leaves the caller on
+# the default profile, which is the narrowest outcome and never a wider one.
+_pi_marker_profile() {
+  [ -f ./.nono-profile ] || return 1
+  _pi_line=
+  IFS= read -r _pi_line < ./.nono-profile || [ -n "$_pi_line" ] || return 1
+  # Exactly one whitespace-separated field on the first line, so surrounding
+  # blanks and a CRLF save are tolerated while `mono a` or `mono-a extra` are
+  # refused instead of being silently trimmed into something that looks like a
+  # valid name. Everything else must be a profile-name character, which is what
+  # makes a path or an expansion impossible by construction.
+  _pi_ifs=$IFS
+  IFS=$(printf ' \t\r\n')
+  set -f
+  # shellcheck disable=SC2086 # deliberate field splitting
+  set -- $_pi_line
+  set +f
+  IFS=$_pi_ifs
+  [ "$#" -eq 1 ] || return 1
+  case "$1" in
+  '' | *[!a-z0-9-]* | -* | *-) return 1 ;;
+  esac
+  printf '%s\n' "$1"
+}
 
 pi() {
   # Bare `pi update` / `pi --update` mean "update via nix", not pi's own updater.
@@ -175,8 +211,21 @@ pi() {
   #
   # exec, so the pane's foreground process becomes nono rather than leaving this
   # shell as a parent herdr would see first.
+  # Profile selection, narrowest first: an explicit PI_SANDBOX_PROFILE (the only
+  # input that may be a path, because it comes from the parent environment rather
+  # than the workspace), then a `.nono-profile` marker, then the default `pi`.
+  # Every anomaly - unreadable, empty, not a bare name - falls back to `pi` with a
+  # warning rather than passing the value through.
+  _pi_profile=${PI_SANDBOX_PROFILE:-}
+  if [ -z "$_pi_profile" ] && { [ -e ./.nono-profile ] || [ -L ./.nono-profile ]; }; then
+    if ! _pi_profile=$(_pi_marker_profile); then
+      _pi_profile=
+      printf 'pi: ./.nono-profile must hold one profile name (a-z, 0-9, -); using pi\n' >&2
+    fi
+  fi
+
   set -- --allow-cwd -- pi "$@"
-  set -- --profile "${PI_SANDBOX_PROFILE:-pi}" "$@"
+  set -- --profile "${_pi_profile:-pi}" "$@"
   for m in $mem; do
     set -- "$m" "$@"
   done
