@@ -4,7 +4,8 @@ description: Versatile review specialist for code diffs, plans, proposed solutio
 tools: read, write, grep, find, ls, bash, intercom, recall, contact_supervisor, lens_diagnostics, lsp_navigation, pi_lens_activate_tools, lens_diagnostic_mark, read_symbol, read_enclosing, symbol_search, codegraph_search, codegraph_callers, codegraph_callees, codegraph_impact, codegraph_explore, codegraph_node, codegraph_status, module_report
 subagentOnlyExtensions: npm:pi-lens, npm:pi-blackhole, npm:@vndv/pi-codegraph
 skills: file-search-replace, karpathy-guidelines, tdd, codegraph, git-commit, domain-modeling, code-review, handoff, writing-for-agents, pi-intercom, pi-lens-lsp-navigation, impeccable, codebase-design
-model: opencode-go/glm-5.3-flash
+# model: opencode-go/deepseek-v4.1-flash
+model: opencode-go/glm-5.3
 thinking: high
 defaultContext: fresh
 systemPromptMode: append
