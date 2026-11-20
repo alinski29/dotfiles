@@ -55,7 +55,17 @@
           throw "nix/roles.nix: role '${role}' still has the placeholder user. Set the real login name."
         else
           home-manager.lib.homeManagerConfiguration {
-            pkgs = import nixpkgs { inherit system; };
+            pkgs = import nixpkgs {
+              inherit system;
+              # rtk (modules/coding-agent.nix) is Apache-2.0 OR BSL-1.1, so
+              # nixpkgs marks the package unfree. Allow that one package by
+              # name rather than flipping allowUnfree globally, which would
+              # silently admit every other unfree package any module pulls in.
+              config.allowUnfreePredicate =
+                pkg: builtins.elem (lib.getName pkg) [
+                  "rtk"
+                ];
+            };
             modules = [ ./home.nix ] ++ modules;
             extraSpecialArgs = { inherit user role pi; };
           };
