@@ -55,6 +55,11 @@ in
     ++ lib.optionals stdenv.hostPlatform.isLinux [
       gnumake
       stdenv.cc
+      # libstdc++.so.6 + libgcc_s.so.1, i.e. the C++ runtime prebuilt ML binaries
+      # ask for, and one such binary: pii's bench dlopens it from
+      # ~/.nix-profile/lib/libonnxruntime.so* instead of shipping its own.
+      gcc.cc.lib
+      onnxruntime
     ];
 
   home.file = {
