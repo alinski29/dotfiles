@@ -25,6 +25,12 @@
       "skillPath": "skills/codegraph/SKILL.md",
       "computedHash": "11f053808a41637e9a6ffe485ee09eec9114577b366cb27971f968b340dfd06f"
     },
+    "coding-agent-docs-optimization": {
+      "source": "samber/developer-relations-skills",
+      "sourceType": "github",
+      "skillPath": "skills/coding-agent-docs-optimization/SKILL.md",
+      "computedHash": "6c1e35e65edaf909687b859f4470182906beac05aba36e8caf1ab7d890bab8f4"
+    },
     "domain-modeling": {
       "source": "mattpocock/skills",
       "sourceType": "github",
@@ -107,6 +113,12 @@
       "sourceType": "github",
       "skillPath": "skills/engineering/prototype/SKILL.md",
       "computedHash": "d3fc74689bd993e39c44bfae510d014eecffbeec2922764b065377fd1327c0f6"
+    },
+    "readme-optimization": {
+      "source": "samber/developer-relations-skills",
+      "sourceType": "github",
+      "skillPath": "skills/readme-optimization/SKILL.md",
+      "computedHash": "b7eed3b2c8f9e54f6592e97ed88d90b4d8d2c1272c2ff91756f266712604c38d"
     },
     "remove-dumb-comments": {
       "source": "lukeberrypi/skills",
