@@ -155,6 +155,11 @@
       "sourceType": "local",
       "computedHash": "c935703739a768b8aaa46e3a900cd2a0863a0b7406b60adb68ba0d23adf2fde3"
     },
+    "spec-review": {
+      "source": "./.agents/skills/spec-review",
+      "sourceType": "local",
+      "computedHash": "9368e6cb2858d0587dc76ccb1190b724650278ec52cd362f5a30c628218461c7"
+    },
     "svelte5-best-practices": {
       "source": "ejirocodes/agent-skills",
       "sourceType": "github",
