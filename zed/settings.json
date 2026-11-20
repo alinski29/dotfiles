@@ -7,6 +7,25 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "ssh_connections": [
+    {
+      "host": "owlchemy-apps",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/alinski/syncthing/Dev/Zendata/owlchemy/repos/fogify"
+          ]
+        }
+      ]
+    }
+  ],
+  "search": {
+    "include_ignored": true
+  },
+  "soft_wrap_indent": "same",
+  "preferred_line_length": 120,
+  "soft_wrap": "editor_width",
   "language_models": {
     "opencode": {
       "show_zen_models": false,
