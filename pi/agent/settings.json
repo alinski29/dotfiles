@@ -20,7 +20,8 @@
     }
   ],
   "defaultTools": [
-    "+codemode"
+    "+codemode",
+    "+ls"
   ],
   "hideThinkingBlock": false,
   "terminal": {

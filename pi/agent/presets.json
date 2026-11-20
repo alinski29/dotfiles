@@ -4,7 +4,11 @@
       "disable": [
         "ast_*",
         "powershell",
-        "todo"
+        "todo",
+        "bg_wait",
+        "agent_browser_electron",
+        "agent_browser_source",
+        "agent_browser_network_source"
       ]
     }
   },
@@ -22,9 +26,9 @@
         "subagent",
         "subagent_*",
         "subagents_*",
-        "intercom",
         "recall",
-        "lens_diagnostics"
+        "codemode",
+        "web_enable"
       ],
       "shown": [
         "edit",
@@ -38,7 +42,10 @@
         "hf-cli",
         "implement",
         "impeccable",
-        "sqlit"
+        "sqlit",
+        "pi-lens-*",
+        "council-mode",
+        "tool-summary"
       ]
     }
   }
