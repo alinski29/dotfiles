@@ -85,7 +85,7 @@ if jq \
     "DOTFILES_HOME": $dotfiles
   };
 
-  # nono's own substitution is `$NAME`: no `${NAME}`, no `~/`. Unknown names are
+  # nono substitutes `$NAME` only: no `${NAME}`, no `~/`. Unknown names are
   # left unchanged so the check below can name them.
   def render: gsub("\\$(?<v>[A-Za-z_][A-Za-z0-9_]*)"; (vars[.v] // "$\(.v)"));
 
