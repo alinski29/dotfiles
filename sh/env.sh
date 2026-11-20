@@ -27,13 +27,11 @@ export XDG_CONFIG_DIRS="/etc/xdg"
 export EDITOR="nvim"
 export HOSTNAME=localhost
 
-export CONDA_HOME="$XDG_DATA_HOME/miniconda3"
 export JAVA_HOME="/usr/lib/jvm/default"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export KDEHOME="$XDG_CONFIG_HOME/kde"
 export MOZILLA_HOME="$XDG_DATA_HOME/mozilla"
-export ION_HOME="$XDG_DATA_HOME/ion/dist"
 export DOCKER_VOLUMES_HOME="$XDG_DATA_HOME/docker/volumes"
 export DOCKER_COMPOSE_HOME="$XDG_CONFIG_HOME/docker-compose"
 
@@ -74,13 +72,12 @@ unset SECRETS_ENV
 # --- PATH -------------------------------------------------------------------
 PATH="/usr/local/bin:\
 $JAVA_HOME/bin:\
-$GOPATH/bin:\
 $CARGO_HOME/bin:\
 $XDG_DATA_HOME/coursier/bin:\
 $XDG_DATA_HOME/stonks/bin:\
 $XDG_CACHE_HOME/.bun/bin:\
-$PATH"
-export PATH
+$PATH:\
+$GOPATH/bin"
 
 # `pi` itself comes from home-manager (nix/modules/coding-agent.nix). This wrapper
 # only moves the pin: bump the flake input, then a home-manager switch re-points it.
