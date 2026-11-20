@@ -31,11 +31,20 @@ const DETAIL_BOX_CHROME = 5;
 const DETAIL_MIN_BODY_ROWS = 3;
 
 /**
- * Wraps the built-in autocomplete provider and appends ` (hidden)` to the
- * description of every `skill:<name>` entry the active preset gates. It removes,
- * reorders, and re-inserts nothing.
+ * Wraps the built-in autocomplete provider and renders every `skill:<name>` entry
+ * the active preset gates as ghost text: the label and the description are styled
+ * with the caller's dim theme, and the description leads with
+ * `(disabled by preset "<name>") — `. It removes, reorders, and re-inserts nothing.
+ *
+ * The marker leads because the slash-command list renders the description in a
+ * second column that is truncated from the right (`SelectList.renderItem`), so an
+ * appended marker is the first thing cut on an ordinary terminal width.
  */
-export function hiddenSkillMarker(gatedNames: () => ReadonlySet<string>): AutocompleteProviderFactory {
+export function hiddenSkillMarker(
+	gatedNames: () => ReadonlySet<string>,
+	presetName: () => string,
+	ghost: (text: string) => string,
+): AutocompleteProviderFactory {
 	return (current: AutocompleteProvider): AutocompleteProvider => ({
 		triggerCharacters: current.triggerCharacters,
 		getSuggestions: async (lines, cursorLine, cursorCol, options) => {
@@ -50,8 +59,9 @@ export function hiddenSkillMarker(gatedNames: () => ReadonlySet<string>): Autoco
 				items: result.items.map((item) => {
 					const name = skillNameOf(item);
 					if (!name || !gated.has(name)) return item;
-					const description = item.description ? `${item.description} (hidden)` : "(hidden)";
-					return { ...item, description };
+					const mark = `(disabled by preset "${presetName()}")`;
+					const description = item.description ? `${mark} — ${item.description}` : mark;
+					return { ...item, label: ghost(item.label), description: ghost(description) };
 				}),
 			};
 		},

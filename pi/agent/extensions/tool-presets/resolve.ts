@@ -26,22 +26,45 @@ export function restrictionMode(tools: ToolRestriction | undefined): Restriction
 	return "none";
 }
 
-export function describeTools(tools: ToolRestriction | undefined): string {
-	if (tools?.enable !== undefined) return `only ${tools.enable.length} tools`;
-	if (tools?.disable !== undefined) return `minus ${tools.disable.length} tools`;
-	return "all tools";
+/**
+ * Resolved sizes of one preset, measured against the live registry and the
+ * loaded skills. Filter-entry counts lie: `ast_*` can match nothing and one
+ * glob can match many, so summaries report what the filter actually resolves to.
+ */
+export interface PresetCounts {
+	toolsActive: number;
+	toolsTotal: number;
+	skillsAdvertised: number;
+	skillsModelInvocable: number;
+	skillsCommandOnly: number;
 }
 
-export function describeSkills(skills: SkillRestriction | undefined): string {
-	if (skills?.enable !== undefined) return `only ${skills.enable.length} skills`;
-	if (skills?.disable !== undefined) return `minus ${skills.disable.length} skills`;
-	return "all skills";
+export function describeTools(tools: ToolRestriction | undefined, counts: PresetCounts): string {
+	switch (restrictionMode(tools)) {
+		case "enable":
+			return `only ${counts.toolsActive} tools`;
+		case "disable":
+			return `minus ${Math.max(0, counts.toolsTotal - counts.toolsActive)} tools`;
+		default:
+			return "all tools";
+	}
+}
+
+export function describeSkills(skills: SkillRestriction | undefined, counts: PresetCounts): string {
+	switch (restrictionMode(skills)) {
+		case "enable":
+			return `only ${counts.skillsAdvertised} skills`;
+		case "disable":
+			return `minus ${Math.max(0, counts.skillsModelInvocable - counts.skillsAdvertised)} skills`;
+		default:
+			return "all skills";
+	}
 }
 
 /** Picker summary: counts only, so single-line truncation cannot hide strictness. */
-export function describePreset(preset: Preset): string {
+export function describePreset(preset: Preset, counts: PresetCounts): string {
 	if (!preset.tools && !preset.skills) return "no restriction";
-	return `${describeTools(preset.tools)} • ${describeSkills(preset.skills)}`;
+	return `${describeTools(preset.tools, counts)} • ${describeSkills(preset.skills, counts)}`;
 }
 
 export interface ToolLayerInput {
@@ -131,12 +154,21 @@ function matchesSkillFilter(skills: SkillRestriction | undefined, name: string):
 }
 
 /**
+ * Does the preset's skill filter name this skill? This is the command gate: a
+ * preset that names a command-only skill refuses its `/skill:<name>` invocation,
+ * because `disable-model-invocation` binds the model, not the user.
+ */
+export function presetGatesSkill(skills: SkillRestriction | undefined, name: string): boolean {
+	return matchesSkillFilter(skills, name);
+}
+
+/**
  * A visible skill the active preset does not advertise. Command-only skills
- * (`disable-model-invocation: true`) are never gated by a preset: the
- * frontmatter floor outranks it, and core's own filter drops them anyway.
+ * (`disable-model-invocation: true`) are never advertised regardless: the
+ * frontmatter floor outranks the preset, and core's own filter drops them.
  */
 export function isGatedSkill(skills: SkillRestriction | undefined, skill: Skill): boolean {
-	return !skill.disableModelInvocation && matchesSkillFilter(skills, skill.name);
+	return !skill.disableModelInvocation && presetGatesSkill(skills, skill.name);
 }
 
 /** The array that replaces `systemPromptOptions.skills`. */
@@ -159,21 +191,12 @@ export function skillWarnings(
 	if (!restriction) return [];
 
 	const unknown: string[] = [];
-	const commandOnly: string[] = [];
 	for (const pattern of [...(restriction.enable ?? []), ...(restriction.disable ?? [])]) {
 		if (isGlob(pattern)) continue;
-		if (!knownNames.has(pattern)) {
-			unknown.push(pattern);
-			continue;
-		}
-		const matches = skills.filter((skill) => skill.name === pattern);
-		if (matches.length > 0 && matches.every((skill) => skill.disableModelInvocation)) commandOnly.push(pattern);
+		if (!knownNames.has(pattern)) unknown.push(pattern);
 	}
 
 	const warnings: string[] = [];
 	if (unknown.length > 0) warnings.push(`Preset "${presetName}": unknown skills: ${unknown.join(", ")}`);
-	if (commandOnly.length > 0) {
-		warnings.push(`Preset "${presetName}": skills entries matching only command-only skills: ${commandOnly.join(", ")}`);
-	}
 	return warnings;
 }

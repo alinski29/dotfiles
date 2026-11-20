@@ -19,13 +19,15 @@
  *   }
  *
  * Tool layers, highest precedence last:
- *   baseline    resolved startup set (core flags, defaultTools)
- *   preset      enable filters the registered set, disable subtracts from baseline
+ *   base        the session's tool set, re-synced against changes other
+ *               extensions make (core flags and defaultTools seed it)
+ *   preset      enable filters the registered set, disable subtracts from the base
  *   overrides   session-local delta
  *
- * Skills have one axis and no state: the preset decides what the prompt
- * advertises, and `disable-model-invocation` is a floor no preset may override.
- * A gated skill is still reachable by typing `/skill:<name>`.
+ * Skills have two gates. The preset decides what the prompt advertises, and it
+ * also refuses `/skill:<name>` for the skills it gates. `disable-model-invocation`
+ * is a floor on the model, never on the user: such a skill stays invocable unless
+ * the preset gates it.
  *
  * A preset with an unknown key is a validation error: warn and skip it. The
  * flat revision 3 schema (`enable`/`disable`/`hidden`/`shown` at preset top
@@ -69,8 +71,9 @@ import {
 	buildDisabledToolsBlock,
 	computeActiveTools,
 	describePreset,
-	isGatedSkill,
+	presetGatesSkill,
 	skillWarnings,
+	type PresetCounts,
 } from "./resolve.ts";
 import { hiddenSkillMarker, showDetailOverlay, showPresetSelector, showToolsOverlay, type DetailSection } from "./ui.ts";
 
@@ -90,6 +93,8 @@ export default function toolPresetsExtension(pi: ExtensionAPI) {
 	let overrides: Overrides = { enabled: [], disabled: [] };
 	/** Resolved startup set, captured once before the first apply. */
 	let baseline: string[] | undefined;
+	/** The set the last apply pushed, for detecting changes made outside the layers. */
+	let lastApplied: string[] | undefined;
 	let persistedSnapshot: string | undefined;
 	let disabledToolsNotified = false;
 	/** Loaded skills, observed from the first `before_agent_start` of a read. */
@@ -175,18 +180,49 @@ export default function toolPresetsExtension(pi: ExtensionAPI) {
 	}
 
 	/**
-	 * Strict recompute: the active set is a pure function of baseline, the active
-	 * preset, and the recorded overrides. A tool activated outside these layers is
-	 * absent from the computed list and removed. Comparing against the live set
-	 * (not a stored copy) is what enforces that.
+	 * Rebase the base against reality before every recompute. Other extensions
+	 * mutate the active set after `session_start` (pi-fff's override-mode rename,
+	 * pi-web-access' `web_enable`), and a base pinned to the startup snapshot would
+	 * revert them. Names we did not apply are adopted; names we applied that are no
+	 * longer live are forgotten. The corrected base is persisted so `/reload`
+	 * recovers it from the branch.
+	 */
+	function syncBaseline(): void {
+		if (baseline === undefined || lastApplied === undefined) return;
+		const live = new Set(pi.getActiveTools());
+		const applied = new Set(lastApplied);
+		const next = new Set(baseline);
+		let changed = false;
+		for (const name of live) {
+			if (!applied.has(name) && !next.has(name)) {
+				next.add(name);
+				changed = true;
+			}
+		}
+		for (const name of applied) {
+			if (!live.has(name) && next.delete(name)) changed = true;
+		}
+		if (!changed) return;
+		baseline = [...next];
+		pi.appendEntry(PRESETS_BASELINE_TYPE, { baseline: [...baseline] });
+	}
+
+	/**
+	 * Recompute the active set from the layers and push it when it differs from the
+	 * live one. The base tracks the session's tool set (see `syncBaseline`), so a
+	 * tool another extension activated after the last apply survives, while a tool
+	 * no layer keeps is removed. `lastApplied` is recorded even on a no-op so the
+	 * next sync knows which names this layer owns.
 	 */
 	function recomputeAndApply(): void {
+		syncBaseline();
 		const computed = computeActiveTools({
 			registered: registeredToolNames(),
 			base: baseline ?? pi.getActiveTools(),
 			preset: activePreset(),
 			overrides,
 		});
+		lastApplied = computed;
 		if (sameSet(computed, pi.getActiveTools())) return;
 		pi.setActiveTools(computed);
 	}
@@ -279,13 +315,13 @@ export default function toolPresetsExtension(pi: ExtensionAPI) {
 		return flag;
 	}
 
-	/** Names the active preset gates, for the autocomplete marker. */
+	/** Names the active preset gates: refused at input and marked in autocomplete. */
 	function gatedSkillNames(): ReadonlySet<string> {
 		const gated = new Set<string>();
 		const restriction = activePreset().skills;
 		if (!restriction) return gated;
 		for (const skill of skillSnapshot()) {
-			if (isGatedSkill(restriction, skill)) gated.add(skill.name);
+			if (presetGatesSkill(restriction, skill.name)) gated.add(skill.name);
 		}
 		return gated;
 	}
@@ -330,16 +366,33 @@ export default function toolPresetsExtension(pi: ExtensionAPI) {
 
 	// --- per-tool overrides ---
 
-	/** Active set the preset alone produces, i.e. with all overrides ignored. */
-	function presetActiveSet(): Set<string> {
+	/** Active set one preset alone produces, i.e. with all overrides ignored. */
+	function presetActiveSet(preset: Preset = activePreset()): Set<string> {
 		return new Set(
 			computeActiveTools({
 				registered: registeredToolNames(),
 				base: baseline ?? pi.getActiveTools(),
-				preset: activePreset(),
+				preset,
 				overrides: { enabled: [], disabled: [] },
 			}),
 		);
+	}
+
+	/**
+	 * What a preset resolves to right now, for the picker and detail summaries.
+	 * Override-free on purpose: a summary describes the preset, while the active
+	 * row's override delta is reported separately as a suffix.
+	 */
+	function presetCounts(preset: Preset): PresetCounts {
+		const skills = skillSnapshot();
+		const modelInvocable = skills.filter((skill) => !skill.disableModelInvocation).length;
+		return {
+			toolsActive: presetActiveSet(preset).size,
+			toolsTotal: registeredToolNames().length,
+			skillsAdvertised: advertisedSkills(preset, skills).filter((skill) => !skill.disableModelInvocation).length,
+			skillsModelInvocable: modelInvocable,
+			skillsCommandOnly: skills.length - modelInvocable,
+		};
 	}
 
 	/**
@@ -458,21 +511,26 @@ export default function toolPresetsExtension(pi: ExtensionAPI) {
 
 		const skills = skillSnapshot();
 		// Command-only skills never reach the prompt (core's own filter drops them), so
-		// they are counted out of "advertised" and marked as their own bucket.
+		// they are counted out of "advertised" and marked as their own bucket. The
+		// heading divides by that same model-invocable total, never by every loaded
+		// skill, or the picker and the detail disagree about the denominator.
 		const advertised = new Set(
 			advertisedSkills(preset, skills)
 				.filter((skill) => !skill.disableModelInvocation)
 				.map((skill) => skill.name),
 		);
+		const modelInvocable = skills.filter((skill) => !skill.disableModelInvocation).length;
+		const commandOnly = skills.length - modelInvocable;
 		const skillLines = skills.map((skill) => {
-			const on = advertised.has(skill.name);
-			const mark = on
-				? ""
+			// The checkbox means "usable in this preset": a gated skill is refused at
+			// input, while a command-only skill stays user-invocable unless gated.
+			const gated = presetGatesSkill(preset.skills, skill.name);
+			const on = !gated;
+			const mark = gated
+				? theme.fg("dim", ` (disabled by preset "${name}")`)
 				: skill.disableModelInvocation
 					? theme.fg("dim", " (command-only)")
-					: isGatedSkill(preset.skills, skill)
-						? theme.fg("dim", " (hidden)")
-						: "";
+					: "";
 			const scope =
 				skill.sourceInfo?.scope === "project"
 					? " [project]"
@@ -485,7 +543,7 @@ export default function toolPresetsExtension(pi: ExtensionAPI) {
 
 		return [
 			{ heading: `Tools (${activeSet.size} of ${registered.length} active)`, lines: toolLines },
-			{ heading: `Skills (${advertised.size} of ${skills.length} advertised)`, lines: skillLines },
+			{ heading: `Skills (${advertised.size} of ${modelInvocable} advertised, ${commandOnly} command-only)`, lines: skillLines },
 		];
 	}
 
@@ -503,7 +561,7 @@ export default function toolPresetsExtension(pi: ExtensionAPI) {
 		const note = name === activePresetName && count > 0 ? ` · ${count} session override${count === 1 ? "" : "s"}` : "";
 		return showDetailOverlay(ctx, {
 			title: name,
-			subtitle: `${describePreset(preset)}${note}`,
+			subtitle: `${describePreset(preset, presetCounts(preset))}${note}`,
 			sections: presetDetailSections(name, preset, ctx.ui.theme),
 		});
 	}
@@ -512,14 +570,17 @@ export default function toolPresetsExtension(pi: ExtensionAPI) {
 
 	async function showPresetPicker(ctx: ExtensionContext): Promise<void> {
 		const active = activePresetName;
-		const items: SelectItem[] = presetNames().map((name) => ({
-			value: name,
-			label:
-				name === active
-					? ctx.ui.theme.fg("success", `● ${name}`) + ctx.ui.theme.fg("dim", deltaSuffix())
-					: `  ${name}`,
-			description: describePreset(presets.get(name) ?? {}),
-		}));
+		const items: SelectItem[] = presetNames().map((name) => {
+			const preset = presets.get(name) ?? {};
+			return {
+				value: name,
+				label:
+					name === active
+						? ctx.ui.theme.fg("success", `● ${name}`) + ctx.ui.theme.fg("dim", deltaSuffix())
+						: `  ${name}`,
+				description: describePreset(preset, presetCounts(preset)),
+			};
+		});
 
 		const result = await showPresetSelector(ctx, items, active, (item) => {
 			void showPresetDetail(ctx, item.value);
@@ -587,6 +648,10 @@ export default function toolPresetsExtension(pi: ExtensionAPI) {
 				warn(ctx, "No tools are registered.");
 				return;
 			}
+			// The overlay renders the live set, so re-establish the preset layer first:
+			// an extension that force-activated tools at `session_start` (pi-web-access
+			// does) would otherwise show them as active until the next turn prunes them.
+			recomputeAndApply();
 			await showToolsOverlay(ctx, {
 				tools,
 				getActive: () => pi.getActiveTools(),
@@ -657,6 +722,7 @@ export default function toolPresetsExtension(pi: ExtensionAPI) {
 
 	pi.on("session_start", async (_event, ctx) => {
 		baseline = undefined;
+		lastApplied = undefined;
 		cachedSkills = undefined;
 		skillFlagCache.clear();
 		checkRetiredDisabledTools(ctx);
@@ -686,7 +752,14 @@ export default function toolPresetsExtension(pi: ExtensionAPI) {
 			overrides = { enabled: [], disabled: [] };
 		}
 
-		ctx.ui.addAutocompleteProvider(hiddenSkillMarker(gatedSkillNames));
+		ctx.ui.addAutocompleteProvider(
+			hiddenSkillMarker(gatedSkillNames, () => activePresetName, (text) => ctx.ui.theme.fg("dim", text)),
+		);
+		// Apply here, not lazily at `before_agent_start`: `/tools` reads the live set,
+		// so a startup `--preset` (and the `default` preset's own disables) would
+		// otherwise look unapplied until the first turn. `before_agent_start` still
+		// recomputes, as the last word against tools registered later in the session.
+		recomputeAndApply();
 		persistIfChanged();
 		updateStatus(ctx);
 	});
@@ -695,6 +768,18 @@ export default function toolPresetsExtension(pi: ExtensionAPI) {
 		restoreFromBranch(ctx);
 		if (baseline !== undefined) recomputeAndApply();
 		updateStatus(ctx);
+	});
+
+	pi.on("input", (event, ctx) => {
+		// Mirrors core's `_expandSkillCommand`: only a message that starts with the
+		// skill command prefix and names a gated skill is refused. Everything else
+		// passes, including `/preset` and `/tools`, which core dispatches as
+		// extension commands before this event ever fires.
+		if (!event.text.startsWith(`/${SKILL_COMMAND_PREFIX}`)) return;
+		const name = event.text.slice(SKILL_COMMAND_PREFIX.length + 1).split(" ")[0];
+		if (!name || !gatedSkillNames().has(name)) return;
+		warn(ctx, `Skill "${name}" is disabled by preset "${activePresetName}".`);
+		return { action: "handled" };
 	});
 
 	pi.on("before_agent_start", async (event, ctx) => {
