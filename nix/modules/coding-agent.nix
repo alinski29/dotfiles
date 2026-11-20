@@ -23,11 +23,12 @@ let
     codegraph
     agentBrowser
     ffmpeg-headless
-    go
+    go_1_27
     go-tools # staticcheck et al.
     gopls
     uv # use `uv venv` / `uv pip`; nix's pip refuses store installs
     bun
+    libsecret # secret-tool: read/write logins from the Secret Service keyring
     # Kernel-enforced sandbox (Landlock) for spawned commands: `nono ...`, see
     # the nono-sandbox skill installed under ~/.config/nono/packages/nolabs-ai/pi.
     # The pack itself is pulled and updated by nono (scripts/nono-packs.sh), so
