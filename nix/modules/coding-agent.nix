@@ -14,9 +14,14 @@ let
   dotfiles = "${homeDir}/.dotfiles";
   link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
 
+  # Not pkgs.agent-browser: that one compiles the CLI and its dashboard from
+  # source whenever a nixpkgs bump invalidates the cache entry, which is tens of
+  # minutes of CPU per update. See ../pkgs/agent-browser-bin.nix.
+  agentBrowser = pkgs.callPackage ../pkgs/agent-browser-bin.nix { };
+
   agentTools = with pkgs; [
     codegraph
-    agent-browser
+    agentBrowser
     ffmpeg-headless
     go
     go-tools # staticcheck et al.
@@ -32,7 +37,9 @@ let
     rtk # rewrites/optimises tool output, state under # ~/.local/share/rtk
     # There is no smaller "headless" package to pick: headless is
     # `--headless=new` on this same binary (agent-browser passes it, plus
-    # --enable-unsafe-swiftshader and, in containers, --no-sandbox).
+    # --enable-unsafe-swiftshader and, in containers, --no-sandbox). agent-browser
+    # never resolves it from PATH - nono/profiles/pi.json pins
+    # AGENT_BROWSER_EXECUTABLE_PATH to the shim below.
     chromium
   ];
 in
@@ -67,5 +74,15 @@ in
     ".config/nono/profiles/pi.json".source = link "nono/profiles/pi.generated.json";
     # Script for linking skills fro skills.txt manifest file
     ".local/bin/link-skills".source = link "scripts/link-skills.sh";
+    # agent-browser always launches Chromium with --remote-debugging-port=0 and waits
+    # for the DevToolsActivePort file; neither works inside the nono sandbox, so this
+    # shim pins an allowed port and publishes the discovery file itself. It must be a
+    # real store copy: an out-of-store symlink into the repo is unreadable from a sandbox
+    # whose workdir is another repo, so execve fails with EACCES. It lives under nix/
+    # because that is the flake root - a path literal reaching outside it resolves into
+    # the store root and fails evaluation.
+    ".local/bin/agent-browser-chrome".source = pkgs.runCommandLocal "agent-browser-chrome" { } ''
+      install -Dm755 ${../scripts/agent-browser-chrome.sh} $out
+    '';
   };
 }
